@@ -1,0 +1,545 @@
+name: DevSecOps Security Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  schedule:
+    # Run security scans daily at 2 AM UTC
+    - cron: '0 2 * * *'
+
+env:
+  PYTHON_VERSION: '3.11'
+  NODE_VERSION: '18'
+  DOCKER_BUILDKIT: 1
+
+jobs:
+  # Job 1: Code Quality and Linting
+  code-quality:
+    name: Code Quality & Linting
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+        cache-dependency-path: frontend/package-lock.json
+
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r backend/requirements.txt
+        pip install black flake8 isort mypy bandit safety detect-secrets checkov semgrep
+
+    - name: Install Node.js dependencies
+      run: |
+        cd frontend
+        npm ci
+        npm install -g eslint prettier
+
+    - name: Python Code Quality
+      run: |
+        echo "🔍 Running Python code quality checks..."
+        
+        # Black formatting check
+        black --check backend/ --diff
+        
+        # Flake8 linting
+        flake8 backend/ --count --statistics --max-line-length=88
+        
+        # Import sorting
+        isort backend/ --check-only --diff
+        
+        # Type checking
+        mypy backend/ --ignore-missing-imports
+
+    - name: JavaScript Code Quality
+      run: |
+        echo "🔍 Running JavaScript code quality checks..."
+        cd frontend
+        
+        # ESLint
+        npx eslint src/ --ext .js,.jsx,.ts,.tsx --max-warnings 0
+        
+        # Prettier
+        npx prettier --check src/
+
+    - name: Docker Quality
+      run: |
+        echo "🔍 Running Docker quality checks..."
+        
+        # Install hadolint
+        wget -O hadolint https://github.com/hadolint/hadolint/releases/latest/download/hadolint-Linux-x86_64
+        chmod +x hadolint
+        sudo mv hadolint /usr/local/bin/
+        
+        # Run hadolint
+        hadolint backend/Dockerfile
+        hadolint frontend/Dockerfile
+
+  # Job 2: Static Application Security Testing (SAST)
+  sast:
+    name: Static Application Security Testing
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+
+    - name: Install security tools
+      run: |
+        python -m pip install --upgrade pip
+        pip install bandit safety semgrep
+        npm install -g eslint
+
+    - name: Python Security (Bandit)
+      run: |
+        echo "🔒 Running Python security scan with Bandit..."
+        bandit -r backend/ -f json -o bandit-report.json
+        bandit -r backend/ -f txt -o bandit-report.txt
+        
+        # Check for high severity issues
+        if grep -q '"severity": "HIGH"' bandit-report.json; then
+          echo "❌ High severity security issues found"
+          cat bandit-report.txt
+          exit 1
+        fi
+
+    - name: Python Dependencies (Safety)
+      run: |
+        echo "🔒 Running Python dependency security scan..."
+        safety check --json --output safety-report.json
+        safety check --output safety-report.txt
+        
+        # Check for vulnerabilities
+        if [ -s safety-report.json ] && [ "$(cat safety-report.json)" != "[]" ]; then
+          echo "❌ Vulnerable dependencies found"
+          cat safety-report.txt
+          exit 1
+        fi
+
+    - name: JavaScript Security (ESLint Security)
+      run: |
+        echo "🔒 Running JavaScript security scan..."
+        cd frontend
+        npm install eslint-plugin-security
+        npx eslint src/ --ext .js,.jsx,.ts,.tsx --config .eslintrc.js
+
+    - name: Multi-language SAST (Semgrep)
+      run: |
+        echo "🔒 Running multi-language SAST with Semgrep..."
+        semgrep --config=auto --json --output=semgrep-report.json .
+        semgrep --config=auto --output=semgrep-report.txt .
+        
+        # Check for high severity findings
+        if grep -q '"severity": "ERROR"' semgrep-report.json; then
+          echo "❌ High severity SAST findings"
+          cat semgrep-report.txt
+          exit 1
+        fi
+
+    - name: Upload SAST reports
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: sast-reports
+        path: |
+          bandit-report.json
+          bandit-report.txt
+          safety-report.json
+          safety-report.txt
+          semgrep-report.json
+          semgrep-report.txt
+
+  # Job 3: Software Composition Analysis (SCA)
+  sca:
+    name: Software Composition Analysis
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+        cache-dependency-path: frontend/package-lock.json
+
+    - name: Install SCA tools
+      run: |
+        python -m pip install --upgrade pip
+        pip install safety pip-audit
+        npm install -g snyk
+
+    - name: Python Dependencies Security
+      run: |
+        echo "📦 Running Python dependency security scan..."
+        
+        # Safety check
+        safety check --json --output python-safety-report.json
+        safety check --output python-safety-report.txt
+        
+        # pip-audit
+        pip-audit --format=json --output=python-pip-audit-report.json
+        pip-audit --format=table --output=python-pip-audit-report.txt
+        
+        # Check for vulnerabilities
+        if [ -s python-safety-report.json ] && [ "$(cat python-safety-report.json)" != "[]" ]; then
+          echo "❌ Vulnerable Python dependencies found"
+          cat python-safety-report.txt
+          exit 1
+        fi
+
+    - name: JavaScript Dependencies Security
+      run: |
+        echo "📦 Running JavaScript dependency security scan..."
+        cd frontend
+        npm ci
+        
+        # npm audit
+        npm audit --json > ../npm-audit-report.json
+        npm audit --audit-level=moderate > ../npm-audit-report.txt
+        
+        # Check for vulnerabilities
+        if npm audit --audit-level=moderate; then
+          echo "✅ No moderate or high severity vulnerabilities found"
+        else
+          echo "❌ Vulnerable JavaScript dependencies found"
+          exit 1
+        fi
+
+    - name: Snyk SCA (if token provided)
+      if: env.SNYK_TOKEN != ''
+      run: |
+        echo "📦 Running Snyk SCA scan..."
+        cd frontend
+        snyk test --json > ../snyk-report.json
+        snyk test > ../snyk-report.txt
+
+    - name: Upload SCA reports
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: sca-reports
+        path: |
+          python-safety-report.json
+          python-safety-report.txt
+          python-pip-audit-report.json
+          python-pip-audit-report.txt
+          npm-audit-report.json
+          npm-audit-report.txt
+          snyk-report.json
+          snyk-report.txt
+
+  # Job 4: Infrastructure as Code (IaC) Scanning
+  iac-scanning:
+    name: Infrastructure as Code Scanning
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+
+    - name: Install IaC scanning tools
+      run: |
+        python -m pip install --upgrade pip
+        pip install checkov
+        wget -O trivy https://github.com/aquasecurity/trivy/releases/latest/download/trivy_0.45.0_Linux-64bit.tar.gz
+        tar -xzf trivy
+        chmod +x trivy
+        sudo mv trivy /usr/local/bin/
+
+    - name: Checkov IaC Scan
+      run: |
+        echo "🏗️ Running Checkov IaC scan..."
+        
+        # Docker Compose scan
+        checkov -f docker-compose.yml --framework docker_compose \
+          --output json --output-file-path checkov-docker-compose-report.json
+        checkov -f docker-compose.yml --framework docker_compose \
+          --output cli --output-file-path checkov-docker-compose-report.txt
+        
+        # Dockerfile scan
+        checkov -f backend/Dockerfile frontend/Dockerfile --framework dockerfile \
+          --output json --output-file-path checkov-dockerfile-report.json
+        checkov -f backend/Dockerfile frontend/Dockerfile --framework dockerfile \
+          --output cli --output-file-path checkov-dockerfile-report.txt
+
+    - name: Trivy IaC Scan
+      run: |
+        echo "🏗️ Running Trivy IaC scan..."
+        trivy config . --format json --output trivy-iac-report.json
+        trivy config . --format table --output trivy-iac-report.txt
+
+    - name: Upload IaC reports
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: iac-reports
+        path: |
+          checkov-docker-compose-report.json
+          checkov-docker-compose-report.txt
+          checkov-dockerfile-report.json
+          checkov-dockerfile-report.txt
+          trivy-iac-report.json
+          trivy-iac-report.txt
+
+  # Job 5: Container Scanning
+  container-scanning:
+    name: Container Scanning
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    needs: [code-quality, sast, sca, iac-scanning]
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Install Trivy
+      run: |
+        wget -O trivy https://github.com/aquasecurity/trivy/releases/latest/download/trivy_0.45.0_Linux-64bit.tar.gz
+        tar -xzf trivy
+        chmod +x trivy
+        sudo mv trivy /usr/local/bin/
+
+    - name: Build Docker images
+      run: |
+        echo "🐳 Building Docker images..."
+        docker build -t apartment-accounting-backend:security-scan backend/
+        docker build -t apartment-accounting-frontend:security-scan frontend/
+
+    - name: Trivy Container Scan - Backend
+      run: |
+        echo "🛡️ Running Trivy container scan on backend..."
+        trivy image --format json --output trivy-backend-container-report.json apartment-accounting-backend:security-scan
+        trivy image --format table --output trivy-backend-container-report.txt apartment-accounting-backend:security-scan
+        
+        # Check for high severity vulnerabilities
+        if grep -q '"Severity": "HIGH"' trivy-backend-container-report.json; then
+          echo "❌ High severity vulnerabilities found in backend container"
+          cat trivy-backend-container-report.txt
+          exit 1
+        fi
+
+    - name: Trivy Container Scan - Frontend
+      run: |
+        echo "🛡️ Running Trivy container scan on frontend..."
+        trivy image --format json --output trivy-frontend-container-report.json apartment-accounting-frontend:security-scan
+        trivy image --format table --output trivy-frontend-container-report.txt apartment-accounting-frontend:security-scan
+        
+        # Check for high severity vulnerabilities
+        if grep -q '"Severity": "HIGH"' trivy-frontend-container-report.json; then
+          echo "❌ High severity vulnerabilities found in frontend container"
+          cat trivy-frontend-container-report.txt
+          exit 1
+        fi
+
+    - name: Docker Bench Security
+      run: |
+        echo "🛡️ Running Docker Bench Security..."
+        docker run --rm --net host --pid host --userns host --cap-add audit_control \
+          -v /etc:/etc:ro -v /usr/lib/:/usr/lib:ro -v /var/lib:/var/lib:ro \
+          -v /var/run/docker.sock:/var/run/docker.sock:ro \
+          -v /usr/share/docker-bench-security:/usr/share/docker-bench-security:ro \
+          --label docker_bench_security \
+          docker/docker-bench-security > docker-bench-security-report.txt || true
+
+    - name: Upload Container reports
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: container-reports
+        path: |
+          trivy-backend-container-report.json
+          trivy-backend-container-report.txt
+          trivy-frontend-container-report.json
+          trivy-frontend-container-report.txt
+          docker-bench-security-report.txt
+
+  # Job 6: Dynamic Application Security Testing (DAST)
+  dast:
+    name: Dynamic Application Security Testing
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    needs: [container-scanning]
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Start application
+      run: |
+        echo "🚀 Starting application for DAST testing..."
+        docker-compose up -d postgres
+        sleep 15
+        docker-compose up -d backend frontend
+        sleep 20
+        
+        # Wait for application to be ready
+        timeout 60 bash -c 'until curl -f http://localhost:8000/health 2>/dev/null; do sleep 2; done' || true
+
+    - name: OWASP ZAP DAST Scan
+      run: |
+        echo "🌐 Running OWASP ZAP DAST scan..."
+        
+        # Run ZAP baseline scan
+        docker run -t owasp/zap2docker-stable zap-baseline.py \
+          -t http://host.docker.internal:8000 \
+          -J zap-dast-report.json \
+          -r zap-dast-report.html || true
+        
+        # Copy reports from container
+        docker cp $(docker ps -lq):/zap/wrk/zap-dast-report.json . || true
+        docker cp $(docker ps -lq):/zap/wrk/zap-dast-report.html . || true
+
+    - name: Stop application
+      if: always()
+      run: |
+        echo "🛑 Stopping application..."
+        docker-compose down
+
+    - name: Upload DAST reports
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: dast-reports
+        path: |
+          zap-dast-report.json
+          zap-dast-report.html
+
+  # Job 7: Security Summary and Notifications
+  security-summary:
+    name: Security Summary
+    runs-on: ubuntu-latest
+    needs: [code-quality, sast, sca, iac-scanning, container-scanning, dast]
+    if: always()
+    
+    steps:
+    - name: Download all reports
+      uses: actions/download-artifact@v3
+      with:
+        path: reports
+
+    - name: Generate Security Summary
+      run: |
+        echo "📊 Generating Security Summary Report..."
+        
+        # Create summary report
+        cat > security-summary.md << EOF
+        # Security Scan Summary
+        
+        **Date:** $(date)
+        **Workflow:** ${{ github.workflow }}
+        **Run ID:** ${{ github.run_id }}
+        **Commit:** ${{ github.sha }}
+        
+        ## Job Results
+        
+        | Job | Status | Details |
+        |-----|--------|---------|
+        | Code Quality | ${{ needs.code-quality.result }} | Python/JS linting and formatting |
+        | SAST | ${{ needs.sast.result }} | Static application security testing |
+        | SCA | ${{ needs.sca.result }} | Software composition analysis |
+        | IaC Scanning | ${{ needs.iac-scanning.result }} | Infrastructure as code scanning |
+        | Container Scanning | ${{ needs.container-scanning.result }} | Container image vulnerability scanning |
+        | DAST | ${{ needs.dast.result }} | Dynamic application security testing |
+        
+        ## Overall Status
+        
+        EOF
+        
+        # Determine overall status
+        if [[ "${{ needs.code-quality.result }}" == "success" && 
+              "${{ needs.sast.result }}" == "success" && 
+              "${{ needs.sca.result }}" == "success" && 
+              "${{ needs.iac-scanning.result }}" == "success" && 
+              "${{ needs.container-scanning.result }}" == "success" ]]; then
+          echo "✅ **PASSED** - All security checks passed" >> security-summary.md
+        else
+          echo "❌ **FAILED** - One or more security checks failed" >> security-summary.md
+        fi
+        
+        echo "" >> security-summary.md
+        echo "## Reports Available" >> security-summary.md
+        echo "- All detailed reports are available in the workflow artifacts" >> security-summary.md
+        echo "- Download artifacts to review specific findings" >> security-summary.md
+        
+        # Display summary
+        cat security-summary.md
+
+    - name: Upload Security Summary
+      uses: actions/upload-artifact@v3
+      with:
+        name: security-summary
+        path: security-summary.md
+
+    - name: Comment on PR (if applicable)
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const fs = require('fs');
+          const summary = fs.readFileSync('security-summary.md', 'utf8');
+          
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: summary
+          });
+
+    - name: Fail workflow if critical jobs failed
+      if: |
+        needs.code-quality.result != 'success' || 
+        needs.sast.result != 'success' || 
+        needs.sca.result != 'success' || 
+        needs.iac-scanning.result != 'success' || 
+        needs.container-scanning.result != 'success'
+      run: |
+        echo "❌ Critical security checks failed. Build cannot proceed."
+        exit 1

@@ -1,0 +1,813 @@
+{
+  "config": {
+    "configFile": "/Users/subhendudattabhowmik/temp/genaiCode/frontend/playwright.config.js",
+    "rootDir": "/Users/subhendudattabhowmik/temp/genaiCode/frontend/tests",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 4
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/Users/subhendudattabhowmik/temp/genaiCode/frontend/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 4
+        },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/Users/subhendudattabhowmik/temp/genaiCode/frontend/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.54.1",
+    "workers": 4,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "accountManagement.spec.js",
+      "file": "accountManagement.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Account Management",
+          "file": "accountManagement.spec.js",
+          "line": 5,
+          "column": 6,
+          "specs": [
+            {
+              "title": "US-001: Create financial accounts",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "timedOut",
+                      "duration": 30079,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded while running \"beforeEach\" hook.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded while running \"beforeEach\" hook.\u001b[39m\n    at /Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/accountManagement.spec.js:6:8",
+                        "location": {
+                          "file": "/Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/accountManagement.spec.js",
+                          "column": 8,
+                          "line": 6
+                        },
+                        "snippet": "  4 |\n  5 | test.describe('Account Management', () => {\n> 6 |   test.beforeEach(async ({ page }) => {\n    |        ^\n  7 |     await login(page);\n  8 |   });\n  9 |"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/accountManagement.spec.js",
+                            "column": 8,
+                            "line": 6
+                          },
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded while running \"beforeEach\" hook.\u001b[39m\n\n  4 |\n  5 | test.describe('Account Management', () => {\n> 6 |   test.beforeEach(async ({ page }) => {\n    |        ^\n  7 |     await login(page);\n  8 |   });\n  9 |\n    at /Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/accountManagement.spec.js:6:8"
+                        },
+                        {
+                          "location": {
+                            "file": "/Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/utils/baseTest.js",
+                            "column": 10,
+                            "line": 10
+                          },
+                          "message": "Error: page.waitForNavigation: Test timeout of 30000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation until \"load\"\n============================================================\n\n   at utils/baseTest.js:10\n\n   8 |   await page.fill('input[name=\"password\"]', password);\n   9 |   await Promise.all([\n> 10 |     page.waitForNavigation(),\n     |          ^\n  11 |     page.click('button[type=\"submit\"]'),\n  12 |   ]);\n  13 |   await expect(page).toHaveURL('/'); // Also use relative path\n    at login (/Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/utils/baseTest.js:10:10)\n    at /Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/accountManagement.spec.js:7:5"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-09-12T18:35:59.188Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/subhendudattabhowmik/temp/genaiCode/frontend/test-results/accountManagement-Account--8c684-1-Create-financial-accounts-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/accountManagement.spec.js",
+                        "column": 8,
+                        "line": 6
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "ad8291ce4c76a65e99f8-f79fd8b50386d055a91d",
+              "file": "accountManagement.spec.js",
+              "line": 10,
+              "column": 3
+            },
+            {
+              "title": "US-002: Update financial accounts",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "timedOut",
+                      "duration": 30087,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded while running \"beforeEach\" hook.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded while running \"beforeEach\" hook.\u001b[39m\n    at /Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/accountManagement.spec.js:6:8",
+                        "location": {
+                          "file": "/Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/accountManagement.spec.js",
+                          "column": 8,
+                          "line": 6
+                        },
+                        "snippet": "  4 |\n  5 | test.describe('Account Management', () => {\n> 6 |   test.beforeEach(async ({ page }) => {\n    |        ^\n  7 |     await login(page);\n  8 |   });\n  9 |"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/accountManagement.spec.js",
+                            "column": 8,
+                            "line": 6
+                          },
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded while running \"beforeEach\" hook.\u001b[39m\n\n  4 |\n  5 | test.describe('Account Management', () => {\n> 6 |   test.beforeEach(async ({ page }) => {\n    |        ^\n  7 |     await login(page);\n  8 |   });\n  9 |\n    at /Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/accountManagement.spec.js:6:8"
+                        },
+                        {
+                          "location": {
+                            "file": "/Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/utils/baseTest.js",
+                            "column": 10,
+                            "line": 10
+                          },
+                          "message": "Error: page.waitForNavigation: Test timeout of 30000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation until \"load\"\n============================================================\n\n   at utils/baseTest.js:10\n\n   8 |   await page.fill('input[name=\"password\"]', password);\n   9 |   await Promise.all([\n> 10 |     page.waitForNavigation(),\n     |          ^\n  11 |     page.click('button[type=\"submit\"]'),\n  12 |   ]);\n  13 |   await expect(page).toHaveURL('/'); // Also use relative path\n    at login (/Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/utils/baseTest.js:10:10)\n    at /Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/accountManagement.spec.js:7:5"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-09-12T18:35:59.195Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/subhendudattabhowmik/temp/genaiCode/frontend/test-results/accountManagement-Account--9acb0-2-Update-financial-accounts-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/accountManagement.spec.js",
+                        "column": 8,
+                        "line": 6
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "ad8291ce4c76a65e99f8-05a4d89f83aac6e08bf9",
+              "file": "accountManagement.spec.js",
+              "line": 25,
+              "column": 3
+            },
+            {
+              "title": "US-003: View accounts with filters",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "timedOut",
+                      "duration": 30075,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded while running \"beforeEach\" hook.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded while running \"beforeEach\" hook.\u001b[39m\n    at /Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/accountManagement.spec.js:6:8",
+                        "location": {
+                          "file": "/Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/accountManagement.spec.js",
+                          "column": 8,
+                          "line": 6
+                        },
+                        "snippet": "  4 |\n  5 | test.describe('Account Management', () => {\n> 6 |   test.beforeEach(async ({ page }) => {\n    |        ^\n  7 |     await login(page);\n  8 |   });\n  9 |"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/accountManagement.spec.js",
+                            "column": 8,
+                            "line": 6
+                          },
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded while running \"beforeEach\" hook.\u001b[39m\n\n  4 |\n  5 | test.describe('Account Management', () => {\n> 6 |   test.beforeEach(async ({ page }) => {\n    |        ^\n  7 |     await login(page);\n  8 |   });\n  9 |\n    at /Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/accountManagement.spec.js:6:8"
+                        },
+                        {
+                          "location": {
+                            "file": "/Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/utils/baseTest.js",
+                            "column": 10,
+                            "line": 10
+                          },
+                          "message": "Error: page.waitForNavigation: Test timeout of 30000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation until \"load\"\n============================================================\n\n   at utils/baseTest.js:10\n\n   8 |   await page.fill('input[name=\"password\"]', password);\n   9 |   await Promise.all([\n> 10 |     page.waitForNavigation(),\n     |          ^\n  11 |     page.click('button[type=\"submit\"]'),\n  12 |   ]);\n  13 |   await expect(page).toHaveURL('/'); // Also use relative path\n    at login (/Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/utils/baseTest.js:10:10)\n    at /Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/accountManagement.spec.js:7:5"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-09-12T18:35:59.183Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/subhendudattabhowmik/temp/genaiCode/frontend/test-results/accountManagement-Account--c1268--View-accounts-with-filters-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/accountManagement.spec.js",
+                        "column": 8,
+                        "line": 6
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "ad8291ce4c76a65e99f8-63f31c2298a49e451b3e",
+              "file": "accountManagement.spec.js",
+              "line": 56,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "auth.spec.js",
+      "file": "auth.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Authentication",
+          "file": "auth.spec.js",
+          "line": 13,
+          "column": 6,
+          "specs": [
+            {
+              "title": "Successful login",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 3,
+                      "parallelIndex": 3,
+                      "status": "failed",
+                      "duration": 8709,
+                      "error": {
+                        "message": "Error: \u001b[31mTimed out 5000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected string: \u001b[32m\"http://localhost:8000/\"\u001b[39m\nReceived string: \u001b[31m\"http://localhost:8000/\u001b[7mlogin\u001b[27m\"\u001b[39m\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 5000ms\u001b[22m\n\u001b[2m    8 × unexpected value \"http://localhost:8000/login\"\u001b[22m\n",
+                        "stack": "Error: \u001b[31mTimed out 5000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected string: \u001b[32m\"http://localhost:8000/\"\u001b[39m\nReceived string: \u001b[31m\"http://localhost:8000/\u001b[7mlogin\u001b[27m\"\u001b[39m\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 5000ms\u001b[22m\n\u001b[2m    8 × unexpected value \"http://localhost:8000/login\"\u001b[22m\n\n    at /Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/auth.spec.js:21:24",
+                        "location": {
+                          "file": "/Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/auth.spec.js",
+                          "column": 24,
+                          "line": 21
+                        },
+                        "snippet": "  19 |       getLocator(page, { testId: 'login-submit', role: 'button', name: 'Login', text: 'Login' }).click(),\n  20 |     ]);\n> 21 |     await expect(page).toHaveURL('/');\n     |                        ^\n  22 |     await expect(getLocator(page, { testId: 'logout', role: 'button', name: 'Logout', text: 'Logout' })).toBeVisible();\n  23 |   });\n  24 |"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/auth.spec.js",
+                            "column": 24,
+                            "line": 21
+                          },
+                          "message": "Error: \u001b[31mTimed out 5000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected string: \u001b[32m\"http://localhost:8000/\"\u001b[39m\nReceived string: \u001b[31m\"http://localhost:8000/\u001b[7mlogin\u001b[27m\"\u001b[39m\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 5000ms\u001b[22m\n\u001b[2m    8 × unexpected value \"http://localhost:8000/login\"\u001b[22m\n\n\n  19 |       getLocator(page, { testId: 'login-submit', role: 'button', name: 'Login', text: 'Login' }).click(),\n  20 |     ]);\n> 21 |     await expect(page).toHaveURL('/');\n     |                        ^\n  22 |     await expect(getLocator(page, { testId: 'logout', role: 'button', name: 'Logout', text: 'Logout' })).toBeVisible();\n  23 |   });\n  24 |\n    at /Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/auth.spec.js:21:24"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-09-12T18:35:59.186Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/subhendudattabhowmik/temp/genaiCode/frontend/test-results/auth-Authentication-Successful-login-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/auth.spec.js",
+                        "column": 24,
+                        "line": 21
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d5ed79a6b333c2ba7209-47a173ba33389d29d222",
+              "file": "auth.spec.js",
+              "line": 14,
+              "column": 3
+            },
+            {
+              "title": "Failed login",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 3,
+                      "status": "passed",
+                      "duration": 848,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-09-12T18:36:11.577Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "d5ed79a6b333c2ba7209-c82aeddcbd46c58ae896",
+              "file": "auth.spec.js",
+              "line": 25,
+              "column": 3
+            },
+            {
+              "title": "Logout",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 4,
+                      "parallelIndex": 3,
+                      "status": "failed",
+                      "duration": 5901,
+                      "error": {
+                        "message": "Error: \u001b[31mTimed out 5000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected string: \u001b[32m\"http://localhost:8000/\"\u001b[39m\nReceived string: \u001b[31m\"http://localhost:8000/\u001b[7mlogin\u001b[27m\"\u001b[39m\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 5000ms\u001b[22m\n\u001b[2m    9 × unexpected value \"http://localhost:8000/login\"\u001b[22m\n",
+                        "stack": "Error: \u001b[31mTimed out 5000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected string: \u001b[32m\"http://localhost:8000/\"\u001b[39m\nReceived string: \u001b[31m\"http://localhost:8000/\u001b[7mlogin\u001b[27m\"\u001b[39m\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 5000ms\u001b[22m\n\u001b[2m    9 × unexpected value \"http://localhost:8000/login\"\u001b[22m\n\n    at /Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/auth.spec.js:43:24",
+                        "location": {
+                          "file": "/Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/auth.spec.js",
+                          "column": 24,
+                          "line": 43
+                        },
+                        "snippet": "  41 |       getLocator(page, { testId: 'login-submit', role: 'button', name: 'Login', text: 'Login' }).click(),\n  42 |     ]);\n> 43 |     await expect(page).toHaveURL('/');\n     |                        ^\n  44 |     await expect(getLocator(page, { testId: 'logout', role: 'button', name: 'Logout', text: 'Logout' })).toBeVisible();\n  45 |     await getLocator(page, { testId: 'logout', role: 'button', name: 'Logout', text: 'Logout' }).click();\n  46 |   });"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/auth.spec.js",
+                            "column": 24,
+                            "line": 43
+                          },
+                          "message": "Error: \u001b[31mTimed out 5000ms waiting for \u001b[39m\u001b[2mexpect(\u001b[22m\u001b[31mpage\u001b[39m\u001b[2m).\u001b[22mtoHaveURL\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected string: \u001b[32m\"http://localhost:8000/\"\u001b[39m\nReceived string: \u001b[31m\"http://localhost:8000/\u001b[7mlogin\u001b[27m\"\u001b[39m\nCall log:\n\u001b[2m  - Expect \"toHaveURL\" with timeout 5000ms\u001b[22m\n\u001b[2m    9 × unexpected value \"http://localhost:8000/login\"\u001b[22m\n\n\n  41 |       getLocator(page, { testId: 'login-submit', role: 'button', name: 'Login', text: 'Login' }).click(),\n  42 |     ]);\n> 43 |     await expect(page).toHaveURL('/');\n     |                        ^\n  44 |     await expect(getLocator(page, { testId: 'logout', role: 'button', name: 'Logout', text: 'Logout' })).toBeVisible();\n  45 |     await getLocator(page, { testId: 'logout', role: 'button', name: 'Logout', text: 'Logout' }).click();\n  46 |   });\n    at /Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/auth.spec.js:43:24"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-09-12T18:36:12.817Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/subhendudattabhowmik/temp/genaiCode/frontend/test-results/auth-Authentication-Logout-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/auth.spec.js",
+                        "column": 24,
+                        "line": 43
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "d5ed79a6b333c2ba7209-3147938db91c006fa841",
+              "file": "auth.spec.js",
+              "line": 36,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "reporting.spec.js",
+      "file": "reporting.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Reporting",
+          "file": "reporting.spec.js",
+          "line": 5,
+          "column": 6,
+          "specs": [
+            {
+              "title": "US-006: Generate account status report",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 5,
+                      "parallelIndex": 3,
+                      "status": "timedOut",
+                      "duration": 30068,
+                      "error": {
+                        "message": "\u001b[31mTest timeout of 30000ms exceeded while running \"beforeEach\" hook.\u001b[39m",
+                        "stack": "\u001b[31mTest timeout of 30000ms exceeded while running \"beforeEach\" hook.\u001b[39m\n    at /Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/reporting.spec.js:6:8",
+                        "location": {
+                          "file": "/Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/reporting.spec.js",
+                          "column": 8,
+                          "line": 6
+                        },
+                        "snippet": "  4 |\n  5 | test.describe('Reporting', () => {\n> 6 |   test.beforeEach(async ({ page }) => {\n    |        ^\n  7 |     await login(page);\n  8 |     \n  9 |     // Setup test data"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/reporting.spec.js",
+                            "column": 8,
+                            "line": 6
+                          },
+                          "message": "\u001b[31mTest timeout of 30000ms exceeded while running \"beforeEach\" hook.\u001b[39m\n\n  4 |\n  5 | test.describe('Reporting', () => {\n> 6 |   test.beforeEach(async ({ page }) => {\n    |        ^\n  7 |     await login(page);\n  8 |     \n  9 |     // Setup test data\n    at /Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/reporting.spec.js:6:8"
+                        },
+                        {
+                          "location": {
+                            "file": "/Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/utils/baseTest.js",
+                            "column": 10,
+                            "line": 10
+                          },
+                          "message": "Error: page.waitForNavigation: Test timeout of 30000ms exceeded.\n=========================== logs ===========================\nwaiting for navigation until \"load\"\n============================================================\n\n   at utils/baseTest.js:10\n\n   8 |   await page.fill('input[name=\"password\"]', password);\n   9 |   await Promise.all([\n> 10 |     page.waitForNavigation(),\n     |          ^\n  11 |     page.click('button[type=\"submit\"]'),\n  12 |   ]);\n  13 |   await expect(page).toHaveURL('/'); // Also use relative path\n    at login (/Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/utils/baseTest.js:10:10)\n    at /Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/reporting.spec.js:7:5"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-09-12T18:36:19.075Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/subhendudattabhowmik/temp/genaiCode/frontend/test-results/reporting-Reporting-US-006-Generate-account-status-report-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/reporting.spec.js",
+                        "column": 8,
+                        "line": 6
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "2dc94d3d98e0a96c4ddf-37e66a00c0f88c0993f4",
+              "file": "reporting.spec.js",
+              "line": 52,
+              "column": 3
+            },
+            {
+              "title": "US-007: Monthly profit/loss report",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 6,
+                      "parallelIndex": 2,
+                      "status": "interrupted",
+                      "duration": 24722,
+                      "error": {
+                        "message": "Error: page.waitForNavigation: Test ended.\n=========================== logs ===========================\nwaiting for navigation until \"load\"\n============================================================",
+                        "stack": "Error: page.waitForNavigation: Test ended.\n=========================== logs ===========================\nwaiting for navigation until \"load\"\n============================================================\n    at login (/Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/utils/baseTest.js:10:10)\n    at /Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/reporting.spec.js:7:5",
+                        "location": {
+                          "file": "/Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/utils/baseTest.js",
+                          "column": 10,
+                          "line": 10
+                        },
+                        "snippet": "\u001b[90m   at \u001b[39mutils/baseTest.js:10\n\n   8 |   await page.fill('input[name=\"password\"]', password);\n   9 |   await Promise.all([\n> 10 |     page.waitForNavigation(),\n     |          ^\n  11 |     page.click('button[type=\"submit\"]'),\n  12 |   ]);\n  13 |   await expect(page).toHaveURL('/'); // Also use relative path"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/utils/baseTest.js",
+                            "column": 10,
+                            "line": 10
+                          },
+                          "message": "Error: page.waitForNavigation: Test ended.\n=========================== logs ===========================\nwaiting for navigation until \"load\"\n============================================================\n\n   at utils/baseTest.js:10\n\n   8 |   await page.fill('input[name=\"password\"]', password);\n   9 |   await Promise.all([\n> 10 |     page.waitForNavigation(),\n     |          ^\n  11 |     page.click('button[type=\"submit\"]'),\n  12 |   ]);\n  13 |   await expect(page).toHaveURL('/'); // Also use relative path\n    at login (/Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/utils/baseTest.js:10:10)\n    at /Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/reporting.spec.js:7:5"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-09-12T18:36:32.967Z",
+                      "annotations": [],
+                      "attachments": [],
+                      "errorLocation": {
+                        "file": "/Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/utils/baseTest.js",
+                        "column": 10,
+                        "line": 10
+                      }
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "2dc94d3d98e0a96c4ddf-72b822275251b14824f0",
+              "file": "reporting.spec.js",
+              "line": 66,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "transactionManagement.spec.js",
+      "file": "transactionManagement.spec.js",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Transaction Management",
+          "file": "transactionManagement.spec.js",
+          "line": 5,
+          "column": 6,
+          "specs": [
+            {
+              "title": "US-004: Record transactions",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 8,
+                      "parallelIndex": 1,
+                      "status": "interrupted",
+                      "duration": 24721,
+                      "error": {
+                        "message": "Error: page.waitForNavigation: Test ended.\n=========================== logs ===========================\nwaiting for navigation until \"load\"\n============================================================",
+                        "stack": "Error: page.waitForNavigation: Test ended.\n=========================== logs ===========================\nwaiting for navigation until \"load\"\n============================================================\n    at login (/Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/utils/baseTest.js:10:10)\n    at /Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/transactionManagement.spec.js:7:5",
+                        "location": {
+                          "file": "/Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/utils/baseTest.js",
+                          "column": 10,
+                          "line": 10
+                        },
+                        "snippet": "\u001b[90m   at \u001b[39mutils/baseTest.js:10\n\n   8 |   await page.fill('input[name=\"password\"]', password);\n   9 |   await Promise.all([\n> 10 |     page.waitForNavigation(),\n     |          ^\n  11 |     page.click('button[type=\"submit\"]'),\n  12 |   ]);\n  13 |   await expect(page).toHaveURL('/'); // Also use relative path"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/utils/baseTest.js",
+                            "column": 10,
+                            "line": 10
+                          },
+                          "message": "Error: page.waitForNavigation: Test ended.\n=========================== logs ===========================\nwaiting for navigation until \"load\"\n============================================================\n\n   at utils/baseTest.js:10\n\n   8 |   await page.fill('input[name=\"password\"]', password);\n   9 |   await Promise.all([\n> 10 |     page.waitForNavigation(),\n     |          ^\n  11 |     page.click('button[type=\"submit\"]'),\n  12 |   ]);\n  13 |   await expect(page).toHaveURL('/'); // Also use relative path\n    at login (/Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/utils/baseTest.js:10:10)\n    at /Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/transactionManagement.spec.js:7:5"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-09-12T18:36:32.965Z",
+                      "annotations": [],
+                      "attachments": [],
+                      "errorLocation": {
+                        "file": "/Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/utils/baseTest.js",
+                        "column": 10,
+                        "line": 10
+                      }
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "ef1d739e4a96e96789ea-f53031136be320d87cb7",
+              "file": "transactionManagement.spec.js",
+              "line": 24,
+              "column": 3
+            },
+            {
+              "title": "US-005: Prevent negative balances",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 7,
+                      "parallelIndex": 0,
+                      "status": "interrupted",
+                      "duration": 24725,
+                      "error": {
+                        "message": "Error: page.waitForNavigation: Test ended.\n=========================== logs ===========================\nwaiting for navigation until \"load\"\n============================================================",
+                        "stack": "Error: page.waitForNavigation: Test ended.\n=========================== logs ===========================\nwaiting for navigation until \"load\"\n============================================================\n    at login (/Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/utils/baseTest.js:10:10)\n    at /Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/transactionManagement.spec.js:7:5",
+                        "location": {
+                          "file": "/Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/utils/baseTest.js",
+                          "column": 10,
+                          "line": 10
+                        },
+                        "snippet": "\u001b[90m   at \u001b[39mutils/baseTest.js:10\n\n   8 |   await page.fill('input[name=\"password\"]', password);\n   9 |   await Promise.all([\n> 10 |     page.waitForNavigation(),\n     |          ^\n  11 |     page.click('button[type=\"submit\"]'),\n  12 |   ]);\n  13 |   await expect(page).toHaveURL('/'); // Also use relative path"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/utils/baseTest.js",
+                            "column": 10,
+                            "line": 10
+                          },
+                          "message": "Error: page.waitForNavigation: Test ended.\n=========================== logs ===========================\nwaiting for navigation until \"load\"\n============================================================\n\n   at utils/baseTest.js:10\n\n   8 |   await page.fill('input[name=\"password\"]', password);\n   9 |   await Promise.all([\n> 10 |     page.waitForNavigation(),\n     |          ^\n  11 |     page.click('button[type=\"submit\"]'),\n  12 |   ]);\n  13 |   await expect(page).toHaveURL('/'); // Also use relative path\n    at login (/Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/utils/baseTest.js:10:10)\n    at /Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/transactionManagement.spec.js:7:5"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-09-12T18:36:32.964Z",
+                      "annotations": [],
+                      "attachments": [],
+                      "errorLocation": {
+                        "file": "/Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/utils/baseTest.js",
+                        "column": 10,
+                        "line": 10
+                      }
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "ef1d739e4a96e96789ea-89d678364731ce128df0",
+              "file": "transactionManagement.spec.js",
+              "line": 45,
+              "column": 3
+            },
+            {
+              "title": "US-004: Edge cases - duplicate and future transactions",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 9,
+                      "parallelIndex": 3,
+                      "status": "interrupted",
+                      "duration": 7603,
+                      "error": {
+                        "message": "Error: page.waitForNavigation: Test ended.\n=========================== logs ===========================\nwaiting for navigation until \"load\"\n============================================================",
+                        "stack": "Error: page.waitForNavigation: Test ended.\n=========================== logs ===========================\nwaiting for navigation until \"load\"\n============================================================\n    at login (/Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/utils/baseTest.js:10:10)\n    at /Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/transactionManagement.spec.js:7:5",
+                        "location": {
+                          "file": "/Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/utils/baseTest.js",
+                          "column": 10,
+                          "line": 10
+                        },
+                        "snippet": "\u001b[90m   at \u001b[39mutils/baseTest.js:10\n\n   8 |   await page.fill('input[name=\"password\"]', password);\n   9 |   await Promise.all([\n> 10 |     page.waitForNavigation(),\n     |          ^\n  11 |     page.click('button[type=\"submit\"]'),\n  12 |   ]);\n  13 |   await expect(page).toHaveURL('/'); // Also use relative path"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/utils/baseTest.js",
+                            "column": 10,
+                            "line": 10
+                          },
+                          "message": "Error: page.waitForNavigation: Test ended.\n=========================== logs ===========================\nwaiting for navigation until \"load\"\n============================================================\n\n   at utils/baseTest.js:10\n\n   8 |   await page.fill('input[name=\"password\"]', password);\n   9 |   await Promise.all([\n> 10 |     page.waitForNavigation(),\n     |          ^\n  11 |     page.click('button[type=\"submit\"]'),\n  12 |   ]);\n  13 |   await expect(page).toHaveURL('/'); // Also use relative path\n    at login (/Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/utils/baseTest.js:10:10)\n    at /Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/transactionManagement.spec.js:7:5"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2025-09-12T18:36:50.185Z",
+                      "annotations": [],
+                      "attachments": [],
+                      "errorLocation": {
+                        "file": "/Users/subhendudattabhowmik/temp/genaiCode/frontend/tests/utils/baseTest.js",
+                        "column": 10,
+                        "line": 10
+                      }
+                    }
+                  ],
+                  "status": "skipped"
+                }
+              ],
+              "id": "ef1d739e4a96e96789ea-5f664e271098f57ea427",
+              "file": "transactionManagement.spec.js",
+              "line": 64,
+              "column": 3
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2025-09-12T18:35:58.806Z",
+    "duration": 59531.873999999996,
+    "expected": 1,
+    "skipped": 4,
+    "unexpected": 6,
+    "flaky": 0
+  }
+}

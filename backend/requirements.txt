@@ -1,0 +1,15 @@
+Flask
+Flask-SQLAlchemy
+SQLAlchemy
+psycopg2-binary
+pydantic
+PyJWT
+python-dotenv
+flask-cors
+flask-limiter
+bcrypt
+python-json-logger
+Werkzeug 
+pytest
+pytest-flask 
+pytest-xdist

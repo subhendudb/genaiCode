@@ -1,0 +1,37 @@
+# Markdown linting configuration
+# Based on MarkdownLint rules
+
+# Line length
+MD013:
+  line_length: 120
+  code_blocks: false
+  tables: false
+
+# Headers
+MD022: false  # Headers should be surrounded by blank lines
+MD025: false  # Multiple top-level headers in the same document
+
+# Lists
+MD029:
+  style: ordered
+
+# Code blocks
+MD040: false  # Fenced code blocks should have a language specified
+MD041: false  # First line in file should be a top-level header
+
+# Emphasis
+MD036: false  # Emphasis used instead of a header
+
+# Links
+MD034: false  # Bare URL used
+
+# Tables
+MD013:
+  tables: false
+
+# Other
+MD033: false  # Inline HTML
+MD026: false  # Trailing punctuation in header
+MD024: false  # Multiple headers with the same content
+MD002: false  # First header should be a top-level header
+MD012: false  # Multiple consecutive blank lines

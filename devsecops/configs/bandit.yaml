@@ -1,0 +1,212 @@
+# Bandit Configuration for Apartment Accounting Application
+# This configuration customizes Bandit security scanning for our specific needs
+
+# Exclude specific test files and directories
+exclude_dirs:
+  - "*/tests/*"
+  - "*/test_*"
+  - "*/__pycache__/*"
+  - "*/venv/*"
+  - "*/env/*"
+  - "*/node_modules/*"
+  - "*/migrations/*"
+
+# Skip specific tests that are not relevant
+skips:
+  - "B101"  # Skip assert_used test (asserts are OK in tests)
+  - "B601"  # Skip paramiko calls (we don't use paramiko)
+  - "B603"  # Skip subprocess calls without shell=True (we use subprocess safely)
+
+# Include specific tests
+include:
+  - "B201"  # Include flask_debug_true
+  - "B301"  # Include pickle
+  - "B302"  # Include marshal
+  - "B303"  # Include md5
+  - "B304"  # Include cipher
+  - "B305"  # Include cipher_mode
+  - "B306"  # Include mktemp_q
+  - "B307"  # Include eval
+  - "B308"  # Include mark_safe
+  - "B309"  # Include httpsconnection
+  - "B310"  # Include urllib_urlopen
+  - "B311"  # Include random
+  - "B312"  # Include telnetlib
+  - "B313"  # Include xml_sax
+  - "B314"  # Include xml_expat
+  - "B315"  # Include xml_minidom
+  - "B316"  # Include xml_etree
+  - "B317"  # Include xml_sax_parse
+  - "B318"  # Include xml_sax_make_parser
+  - "B319"  # Include xml_sax_parseString
+  - "B320"  # Include xml_sax_make_parser
+  - "B321"  # Include xml_sax_parse
+  - "B322"  # Include xml_sax_make_parser
+  - "B323"  # Include xml_sax_parseString
+  - "B324"  # Include hashlib_new_insecure_functions
+  - "B325"  # Include tempfile_mktemp
+  - "B501"  # Include request_with_no_cert_validation
+  - "B502"  # Include ssl_with_bad_version
+  - "B503"  # Include ssl_with_bad_defaults
+  - "B504"  # Include ssl_with_no_version
+  - "B505"  # Include weak_cryptographic_key
+  - "B506"  # Include yaml_load
+  - "B507"  # Include ssh_no_host_key_verification
+  - "B508"  # Include snmp_insecure_version
+  - "B509"  # Include snmp_weak_cryptography
+  - "B601"  # Include shell_injection_subprocess
+  - "B602"  # Include subprocess_popen_with_shell_equals_true
+  - "B603"  # Include subprocess_without_shell_equals_true
+  - "B604"  # Include any_other_function_with_shell_equals_true
+  - "B605"  # Include start_process_with_a_shell
+  - "B606"  # Include start_process_with_no_shell
+  - "B607"  # Include start_process_with_partial_path
+  - "B608"  # Include hardcoded_sql_expressions
+  - "B609"  # Include linux_commands_wildcard_injection
+  - "B610"  # Include django_extra_used
+  - "B611"  # Include django_rawsql_used
+  - "B612"  # Include logging_config_insecure_listen
+  - "B613"  # Include python_jwt_weak
+  - "B614"  # Include django_middleware_disabled
+  - "B615"  # Include django_debug_enabled
+  - "B616"  # Include django_middleware_missing
+  - "B617"  # Include django_middleware_order
+  - "B618"  # Include django_middleware_https
+  - "B619"  # Include django_middleware_https_redirect
+  - "B620"  # Include django_middleware_https_strict_transport
+  - "B621"  # Include django_middleware_https_strict_transport_subdomains
+  - "B622"  # Include django_middleware_https_strict_transport_preload
+  - "B623"  # Include django_middleware_https_strict_transport_include_subdomains
+  - "B624"  # Include django_middleware_https_strict_transport_max_age
+  - "B625"  # Include django_middleware_https_strict_transport_include_subdomains
+  - "B626"  # Include django_middleware_https_strict_transport_preload
+  - "B627"  # Include django_middleware_https_strict_transport_include_subdomains
+  - "B628"  # Include django_middleware_https_strict_transport_max_age
+  - "B629"  # Include django_middleware_https_strict_transport_include_subdomains
+  - "B630"  # Include django_middleware_https_strict_transport_preload
+
+# Confidence levels to include
+confidence:
+  - "HIGH"
+  - "MEDIUM"
+  - "LOW"
+
+# Severity levels to include
+severity:
+  - "HIGH"
+  - "MEDIUM"
+  - "LOW"
+
+# Output format
+format: json
+
+# Output file
+output_file: bandit-report.json
+
+# Verbose output
+verbose: true
+
+# Show skipped tests
+show_skipped: true
+
+# Show only issues
+show_only: false
+
+# Recursive scanning
+recursive: true
+
+# Follow symlinks
+follow_links: false
+
+# Aggressive mode (more thorough scanning)
+aggressive: false
+
+# Baseline file (for comparing against previous scans)
+baseline: .bandit-baseline.json
+
+# Profile to use (if any)
+profile: null
+
+# Custom test plugins
+plugins: []
+
+# Custom test configuration
+test_config: {}
+
+# Ignore specific lines
+ignore_lines: {}
+
+# Ignore specific files
+ignore_files: []
+
+# Ignore specific directories
+ignore_dirs: []
+
+# Custom test patterns
+test_patterns: []
+
+# Custom test names
+test_names: []
+
+# Custom test ids
+test_ids: []
+
+# Custom test severity
+test_severity: {}
+
+# Custom test confidence
+test_confidence: {}
+
+# Custom test description
+test_description: {}
+
+# Custom test more info
+test_more_info: {}
+
+# Custom test references
+test_references: {}
+
+# Custom test examples
+test_examples: {}
+
+# Custom test notes
+test_notes: {}
+
+# Custom test tags
+test_tags: {}
+
+# Custom test categories
+test_categories: {}
+
+# Custom test impact
+test_impact: {}
+
+# Custom test likelihood
+test_likelihood: {}
+
+# Custom test remediation
+test_remediation: {}
+
+# Custom test references
+test_references: {}
+
+# Custom test examples
+test_examples: {}
+
+# Custom test notes
+test_notes: {}
+
+# Custom test tags
+test_tags: {}
+
+# Custom test categories
+test_categories: {}
+
+# Custom test impact
+test_impact: {}
+
+# Custom test likelihood
+test_likelihood: {}
+
+# Custom test remediation
+test_remediation: {}
