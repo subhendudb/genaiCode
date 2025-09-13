@@ -47,7 +47,7 @@ test.describe('Transaction Management', () => {
       page
         .locator('text=Bank Account')
         .locator('..')
-        .locator('.account-balance')
+        .locator('.account-balance'),
     ).toHaveText('$850.00');
   });
 
@@ -68,7 +68,7 @@ test.describe('Transaction Management', () => {
     // Verify error
     await expect(page.locator('.Toastify__toast--error')).toBeVisible();
     await expect(page.locator('.Toastify__toast--error')).toContainText(
-      'Insufficient funds'
+      'Insufficient funds',
     );
 
     // Verify balance unchanged
@@ -77,7 +77,7 @@ test.describe('Transaction Management', () => {
       page
         .locator('text=Bank Account')
         .locator('..')
-        .locator('.account-balance')
+        .locator('.account-balance'),
     ).toHaveText('$1,000.00');
   });
 
@@ -110,7 +110,7 @@ test.describe('Transaction Management', () => {
     await page.fill('input[name="description"]', 'Duplicate test');
     await page.click('button:has-text("Record Transaction")');
     await expect(page.locator('.Toastify__toast--warning')).toContainText(
-      'possible duplicate'
+      'possible duplicate',
     );
 
     // Future-dated transaction

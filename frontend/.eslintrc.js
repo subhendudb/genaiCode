@@ -46,14 +46,14 @@ module.exports = {
     'no-debugger': 'error',
     'no-unused-vars': 'error',
 
-    // Code style
-    indent: ['error', 2],
-    'linebreak-style': ['error', 'unix'],
-    quotes: ['error', 'single'],
-    semi: ['error', 'always'],
-    'comma-dangle': ['error', 'always-multiline'],
-    'object-curly-spacing': ['error', 'always'],
-    'array-bracket-spacing': ['error', 'never'],
+    // Code style - disabled formatting rules that conflict with Prettier
+    indent: 'off',
+    'linebreak-style': 'off',
+    quotes: 'off',
+    semi: 'off',
+    'comma-dangle': 'off',
+    'object-curly-spacing': 'off',
+    'array-bracket-spacing': 'off',
   },
   settings: {
     react: {

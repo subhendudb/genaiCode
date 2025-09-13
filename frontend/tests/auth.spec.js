@@ -31,7 +31,7 @@ test.describe('Authentication', () => {
         role: 'button',
         name: 'Logout',
         text: 'Logout',
-      })
+      }),
     ).toBeVisible();
   });
 
@@ -49,7 +49,7 @@ test.describe('Authentication', () => {
     ]);
     await expect(page).toHaveURL('/login');
     await expect(
-      getLocator(page, { testId: 'login-error', text: 'Invalid' })
+      getLocator(page, { testId: 'login-error', text: 'Invalid' }),
     ).toBeVisible();
   });
 
@@ -72,7 +72,7 @@ test.describe('Authentication', () => {
         role: 'button',
         name: 'Logout',
         text: 'Logout',
-      })
+      }),
     ).toBeVisible();
     await getLocator(page, {
       testId: 'logout',

@@ -39,11 +39,13 @@ export const AuthProvider = ({ children }) => {
       typeof safeCredentials !== 'object' ||
       Array.isArray(safeCredentials) ||
       typeof safeCredentials.username !== 'string' ||
-      typeof safeCredentials.password !== 'string'
+      typeof safeCredentials.password !== 'string' // pragma: allowlist secret
     ) {
       // Optionally, you can return a rejected promise with a message
       return Promise.reject(
-        new Error('Login requires an object with username and password fields.')
+        new Error(
+          'Login requires an object with username and password fields.',
+        ),
       );
     }
 

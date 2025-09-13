@@ -20,7 +20,7 @@ test.describe('Account Management', () => {
     // Verify account appears in the list
     await expect(page.locator(`text=${accountData.name}`)).toBeVisible();
     await expect(
-      page.locator(`text=$${accountData.opening_balance}`)
+      page.locator(`text=$${accountData.opening_balance}`),
     ).toBeVisible();
   });
 
@@ -73,10 +73,10 @@ test.describe('Account Management', () => {
 
     // Filtering by type is not implemented in the UI, so just check both are visible
     await expect(
-      page.getByText(assetAccount.name, { exact: true })
+      page.getByText(assetAccount.name, { exact: true }),
     ).toBeVisible();
     await expect(
-      page.getByText(liabilityAccount.name, { exact: true })
+      page.getByText(liabilityAccount.name, { exact: true }),
     ).toBeVisible();
 
     // If sorting or filtering is added in the future, add those checks here

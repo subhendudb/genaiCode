@@ -17,7 +17,7 @@ const useApi = () => {
       const response = await axios.get(url, { ...config, params });
       return response;
     },
-    [config]
+    [config],
   );
 
   const post = useCallback(
@@ -25,7 +25,7 @@ const useApi = () => {
       const response = await axios.post(url, data, config);
       return response;
     },
-    [config]
+    [config],
   );
 
   const put = useCallback(
@@ -33,7 +33,7 @@ const useApi = () => {
       const response = await axios.put(url, data, config);
       return response;
     },
-    [config]
+    [config],
   );
 
   return { get, post, put };

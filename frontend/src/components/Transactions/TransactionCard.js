@@ -78,7 +78,7 @@ const TransactionCard = ({ transaction }) => {
   const isNegative = parseFloat(transaction.amount) < 0;
   const formattedDate = format(
     new Date(transaction.transaction_date),
-    'MMM dd, yyyy'
+    'MMM dd, yyyy',
   );
   const formattedAmount = Math.abs(parseFloat(transaction.amount)).toFixed(2);
   return (

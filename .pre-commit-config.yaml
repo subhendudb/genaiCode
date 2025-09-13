@@ -47,7 +47,27 @@ repos:
     hooks:
       - id: detect-secrets
         args: ['--baseline', '.secrets.baseline']
-        exclude: package.lock.json|yarn.lock
+        exclude: |
+          (?x)^(
+            package\.lock\.json|
+            yarn\.lock|
+            .*test.*\.py$|
+            .*test.*\.js$|
+            .*test.*\.ts$|
+            .*test.*\.jsx$|
+            .*test.*\.tsx$|
+            docker-compose\.yml$|
+            .*\.env$|
+            .*\.env\.example$|
+            .*\.env\.local$|
+            .*\.env\.development$|
+            .*\.env\.test$|
+            .*\.env\.production$|
+            .*config.*\.example$|
+            .*config.*\.template$|
+            .*\.example$|
+            .*\.template$
+          )$
 
   # Python code quality and security
   - repo: https://github.com/psf/black

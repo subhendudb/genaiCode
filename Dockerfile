@@ -1,4 +1,5 @@
 # Nginx stage
+# checkov:skip=CKV_DOCKER_3: nginx requires root to bind to port 80, worker processes run as nginx user
 FROM nginx:alpine
 
 # Create a non-root user for nginx (nginx already exists, but we'll create our own)

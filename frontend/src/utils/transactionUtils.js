@@ -34,7 +34,7 @@ export const filterTransactions = (transactions, filters) => {
 export const sortTransactions = (
   transactions,
   sortBy = 'date',
-  ascending = false
+  ascending = false,
 ) => {
   return [...transactions].sort((a, b) => {
     const dateA = new Date(a.transaction_date);
