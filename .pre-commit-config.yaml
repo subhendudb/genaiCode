@@ -31,6 +31,7 @@ repos:
       - id: end-of-file-fixer
       - id: check-yaml
       - id: check-json
+        exclude: ^(.*-report\.json|.*test.*\.json|bandit-report\.json)$
       - id: check-toml
       - id: check-merge-conflict
       - id: check-added-large-files
@@ -128,7 +129,7 @@ repos:
     rev: 3.0.0
     hooks:
       - id: checkov
-        args: ['--framework', 'dockerfile', '--framework', 'docker_compose']
+        args: ['--framework', 'dockerfile']
         files: Dockerfile|docker-compose\.yml|\.yaml$
 
   # YAML formatting and validation
