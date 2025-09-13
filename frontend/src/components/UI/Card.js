@@ -8,11 +8,13 @@ const Card = styled.div`
   border: 1px solid ${({ theme }) => theme.border};
   margin-bottom: ${({ marginBottom }) => marginBottom || '0'};
   width: ${({ width }) => width || 'auto'};
-  ${({ hoverEffect }) => hoverEffect && `
+  ${({ hoverEffect }) =>
+    hoverEffect &&
+    `
     &:hover {
       box-shadow: 0 4px 8px rgba(0,0,0,0.1);
       transform: translateY(-2px);
     }
   `}
 `;
-export default Card; 
+export default Card;

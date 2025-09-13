@@ -21,4 +21,4 @@ const RightPanel = () => {
     </RightPanelContainer>
   );
 };
-export default RightPanel; 
+export default RightPanel;

@@ -15,7 +15,7 @@ const Transactions = () => {
       try {
         const [accountsRes, transactionsRes] = await Promise.all([
           get('/api/accounts'),
-          get('/api/transactions')
+          get('/api/transactions'),
         ]);
         setAccounts(accountsRes.data);
         setTransactions(transactionsRes.data);
@@ -29,7 +29,7 @@ const Transactions = () => {
     fetchData();
   }, [get]);
 
-  const handleTransactionCreated = (newTransaction) => {
+  const handleTransactionCreated = newTransaction => {
     setTransactions(prev => [newTransaction, ...prev]);
   };
 
@@ -37,7 +37,10 @@ const Transactions = () => {
 
   return (
     <div>
-      <TransactionForm accounts={accounts} onTransactionCreated={handleTransactionCreated} />
+      <TransactionForm
+        accounts={accounts}
+        onTransactionCreated={handleTransactionCreated}
+      />
       <TransactionList transactions={transactions} accounts={accounts} />
     </div>
   );

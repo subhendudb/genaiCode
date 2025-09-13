@@ -8,14 +8,18 @@ const AccountCardContainer = styled(Card)`
   padding: 20px;
   transition: transform 0.2s;
   cursor: pointer;
-  border-left: 4px solid ${({ theme, accountType }) =>
-    accountType === 'ASSET' ? '#2ecc71' :
-    accountType === 'LIABILITY' ? '#e74c3c' :
-    accountType === 'INCOME' ? '#3498db' :
-    '#f39c12'};
+  border-left: 4px solid
+    ${({ theme, accountType }) =>
+      accountType === 'ASSET'
+        ? '#2ecc71'
+        : accountType === 'LIABILITY'
+        ? '#e74c3c'
+        : accountType === 'INCOME'
+        ? '#3498db'
+        : '#f39c12'};
   &:hover {
     transform: translateY(-5px);
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
 `;
 
@@ -43,7 +47,7 @@ const AccountBalance = styled.p`
   font-size: 1.5rem;
   font-weight: bold;
   margin: 10px 0;
-  color: ${({ positive, theme }) => positive ? theme.primary : '#e74c3c'};
+  color: ${({ positive, theme }) => (positive ? theme.primary : '#e74c3c')};
 `;
 
 const AccountMeta = styled.div`
@@ -61,7 +65,7 @@ const AccountCard = ({ account }) => {
   const isPositive = parseFloat(account.current_balance) >= 0;
   return (
     <AccountCardContainer
-      className="account-card"
+      className='account-card'
       onClick={handleClick}
       accountType={account.type}
     >
@@ -75,11 +79,17 @@ const AccountCard = ({ account }) => {
       </AccountBalance>
       {account.description && <p>{account.description}</p>}
       <AccountMeta>
-        <span>Created: {new Date(account.created_at).toLocaleDateString()}</span>
-        <span>Last updated: {new Date(account.updated_at).toLocaleDateString()}</span>
+        <span>
+          Created: {new Date(account.created_at).toLocaleDateString()}
+        </span>
+        <span>
+          Last updated: {new Date(account.updated_at).toLocaleDateString()}
+        </span>
       </AccountMeta>
-      <Button onClick={() => navigate(`/accounts/${account.id}`)}>View / Edit</Button>
+      <Button onClick={() => navigate(`/accounts/${account.id}`)}>
+        View / Edit
+      </Button>
     </AccountCardContainer>
   );
 };
-export default AccountCard; 
+export default AccountCard;

@@ -19,4 +19,4 @@ const Button = styled.button`
     cursor: not-allowed;
   }
 `;
-export default Button; 
+export default Button;

@@ -177,8 +177,8 @@ ROLLBACK;
 BEGIN;
 SELECT plan(1);
 
-PREPARE invalid_account_type AS 
-INSERT INTO accounting.accounts (name, type, opening_balance, current_balance) 
+PREPARE invalid_account_type AS
+INSERT INTO accounting.accounts (name, type, opening_balance, current_balance)
 VALUES ('Test', 'INVALID', 0, 0);
 
 SELECT throws_ok(
@@ -195,7 +195,7 @@ ROLLBACK;
 BEGIN;
 SELECT plan(2);
 
-PREPARE negative_amount AS 
+PREPARE negative_amount AS
 INSERT INTO accounting.transactions (account_id, contra_account_id, transaction_date, amount)
 VALUES ('00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000002', CURRENT_DATE, -100);
 
@@ -206,7 +206,7 @@ SELECT throws_ok(
     'Should reject negative transaction amount'
 );
 
-PREPARE zero_amount AS 
+PREPARE zero_amount AS
 INSERT INTO accounting.transactions (account_id, contra_account_id, transaction_date, amount)
 VALUES ('00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000002', CURRENT_DATE, 0);
 
@@ -224,7 +224,7 @@ ROLLBACK;
 BEGIN;
 SELECT plan(1);
 
-PREPARE same_account_transaction AS 
+PREPARE same_account_transaction AS
 INSERT INTO accounting.transactions (account_id, contra_account_id, transaction_date, amount)
 VALUES ('00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000001', CURRENT_DATE, 100);
 
@@ -246,7 +246,7 @@ SELECT plan(1);
 INSERT INTO accounting.accounts (id, name, type, opening_balance, current_balance)
 VALUES ('00000000-0000-0000-0000-000000000001', 'Test', 'ASSET', 0, 0);
 
-PREPARE duplicate_balance_history AS 
+PREPARE duplicate_balance_history AS
 INSERT INTO accounting.balance_history (account_id, balance_date, balance)
 VALUES ('00000000-0000-0000-0000-000000000001', CURRENT_DATE, 100),
        ('00000000-0000-0000-0000-000000000001', CURRENT_DATE, 200);
@@ -327,13 +327,13 @@ SELECT plan(3);
 
 -- Setup test data
 INSERT INTO accounting.accounts (id, name, type, opening_balance, current_balance)
-VALUES 
+VALUES
     ('00000000-0000-0000-0000-000000000001', 'Rent Income', 'INCOME', 0, 1000),
     ('00000000-0000-0000-0000-000000000002', 'Maintenance Expense', 'EXPENSE', 0, 500),
     ('00000000-0000-0000-0000-000000000003', 'Bank Account', 'ASSET', 1000, 1500);
 
 INSERT INTO accounting.transactions (account_id, contra_account_id, transaction_date, amount, description)
-VALUES 
+VALUES
     ('00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000003', '2023-01-01', 1000, 'Rent payment'),
     ('00000000-0000-0000-0000-000000000003', '00000000-0000-0000-0000-000000000002', '2023-01-02', 500, 'Maintenance work');
 

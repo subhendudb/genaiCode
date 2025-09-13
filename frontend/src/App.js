@@ -14,7 +14,7 @@ import AccountDetail from './components/Accounts/AccountDetail';
 function App() {
   const [theme, setTheme] = useState('light');
   const toggleTheme = () => {
-    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+    setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
   };
   return (
     <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
@@ -23,14 +23,15 @@ function App() {
       <Router>
         <AuthProvider>
           <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/" element={
-              <Layout theme={theme} toggleTheme={toggleTheme} />
-            }>
-              <Route path="accounts" element={<Accounts />} />
-              <Route path="accounts/:id" element={<AccountDetail />} />
-              <Route path="transactions" element={<Transactions />} />
-              <Route path="reports" element={<Reports />} />
+            <Route path='/login' element={<Login />} />
+            <Route
+              path='/'
+              element={<Layout theme={theme} toggleTheme={toggleTheme} />}
+            >
+              <Route path='accounts' element={<Accounts />} />
+              <Route path='accounts/:id' element={<AccountDetail />} />
+              <Route path='transactions' element={<Transactions />} />
+              <Route path='reports' element={<Reports />} />
             </Route>
           </Routes>
         </AuthProvider>
@@ -38,4 +39,4 @@ function App() {
     </ThemeProvider>
   );
 }
-export default App; 
+export default App;

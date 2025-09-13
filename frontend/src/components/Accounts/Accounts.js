@@ -13,9 +13,9 @@ const Accounts = () => {
     const fetchAccounts = async () => {
       try {
         const response = await get('/api/accounts');
-        console.log(response.data)
+        console.log(response.data);
         // Defensive: fallback to empty array if response is malformed
-        setAccounts(response?.data|| []);
+        setAccounts(response?.data || []);
       } catch (error) {
         console.error('Error fetching accounts:', error);
         setAccounts([]); // Ensure accounts is always an array
@@ -26,7 +26,7 @@ const Accounts = () => {
     fetchAccounts();
   }, [get]);
 
-  const handleAccountCreated = (newAccount) => {
+  const handleAccountCreated = newAccount => {
     setAccounts(prev => [...prev, newAccount]);
   };
 

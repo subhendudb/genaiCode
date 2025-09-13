@@ -47,4 +47,4 @@ module.exports = {
   },
   mode: 'development', // or 'production'
   devtool: 'source-map', // For easier debugging
-}; 
+};

@@ -51,8 +51,8 @@ const AccountName = styled.span`
 const AccountBalance = styled.span`
   flex: 1;
   text-align: right;
-  font-weight: ${({ bold }) => bold ? 'bold' : 'normal'};
-  color: ${({ positive, theme }) => positive ? theme.primary : '#e74c3c'};
+  font-weight: ${({ bold }) => (bold ? 'bold' : 'normal')};
+  color: ${({ positive, theme }) => (positive ? theme.primary : '#e74c3c')};
 `;
 
 const TotalRow = styled.div`
@@ -108,22 +108,17 @@ const BalanceReport = () => {
               .map(account => (
                 <AccountRow key={account.id}>
                   <AccountName>{account.name}</AccountName>
-                  <AccountBalance
-                    positive={account.current_balance >= 0}
-                  >
-                    {account.current_balance >= 0 ? '' : '('}
-                    ${Math.abs(account.current_balance).toFixed(2)}
+                  <AccountBalance positive={account.current_balance >= 0}>
+                    {account.current_balance >= 0 ? '' : '('}$
+                    {Math.abs(account.current_balance).toFixed(2)}
                     {account.current_balance >= 0 ? '' : ')'}
                   </AccountBalance>
                 </AccountRow>
               ))}
             <TotalRow>
               <span>Total {type.charAt(0) + type.slice(1).toLowerCase()}</span>
-              <AccountBalance
-                bold
-                positive={reportData.totals[type] >= 0}
-              >
-                ${Math.abs(reportData.totals[type]).toFixed(2)}
+              <AccountBalance bold positive={reportData.totals[type] >= 0}>
+                ${Math.abs(reportData.totals[type] || 0).toFixed(2)}
               </AccountBalance>
             </TotalRow>
           </AccountTypeSection>
@@ -138,4 +133,4 @@ const BalanceReport = () => {
     </ReportContainer>
   );
 };
-export default BalanceReport; 
+export default BalanceReport;

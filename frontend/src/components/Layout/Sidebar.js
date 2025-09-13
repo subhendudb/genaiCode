@@ -46,16 +46,16 @@ const Sidebar = () => {
       <nav>
         <NavList>
           <NavItem>
-            <StyledNavLink to="/accounts">Accounts</StyledNavLink>
+            <StyledNavLink to='/accounts'>Accounts</StyledNavLink>
           </NavItem>
           <NavItem>
-            <StyledNavLink to="/transactions">Transactions</StyledNavLink>
+            <StyledNavLink to='/transactions'>Transactions</StyledNavLink>
           </NavItem>
           <NavItem>
-            <StyledNavLink to="/reports">Reports</StyledNavLink>
+            <StyledNavLink to='/reports'>Reports</StyledNavLink>
           </NavItem>
           <NavItem>
-            <StyledNavLink as="button" onClick={logout} data-testid="logout">
+            <StyledNavLink as='button' onClick={logout} data-testid='logout'>
               Logout
             </StyledNavLink>
           </NavItem>
@@ -64,4 +64,4 @@ const Sidebar = () => {
     </SidebarContainer>
   );
 };
-export default Sidebar; 
+export default Sidebar;

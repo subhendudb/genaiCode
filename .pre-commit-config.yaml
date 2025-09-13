@@ -1,6 +1,27 @@
 # Pre-commit configuration for Apartment Accounting Application
 # This file configures security and quality checks to run before each commit
 
+# Global exclusions
+exclude: |
+  (?x)^(
+    .*node_modules/.*|
+    .*\.pyc$|
+    .*\.pyo$|
+    .*\.pyd$|
+    __pycache__/.*|
+    \.pytest_cache/.*|
+    \.mypy_cache/.*|
+    \.coverage.*|
+    htmlcov/.*|
+    \.venv/.*|
+    venv/.*|
+    devsecops/.*|
+    testing/.*|
+    documents/.*|
+    manuals/.*|
+    \.git/.*
+  )$
+
 repos:
   # General hooks
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -77,12 +98,12 @@ repos:
       - id: eslint
         files: \.(js|jsx|ts|tsx)$
         additional_dependencies:
-          - eslint@8.47.0
-          - eslint-plugin-security@1.7.1
-          - eslint-plugin-react@7.33.2
-          - eslint-plugin-react-hooks@4.6.0
-          - @typescript-eslint/eslint-plugin@6.4.0
-          - @typescript-eslint/parser@6.4.0
+          - "eslint@8.47.0"
+          - "eslint-plugin-security@1.7.1"
+          - "eslint-plugin-react@7.33.2"
+          - "eslint-plugin-react-hooks@4.6.0"
+          - "@typescript-eslint/eslint-plugin@6.4.0"
+          - "@typescript-eslint/parser@6.4.0"
         args: ['--config', 'frontend/.eslintrc.js']
 
   - repo: https://github.com/pre-commit/mirrors-prettier
@@ -108,8 +129,8 @@ repos:
         files: Dockerfile|docker-compose\.yml|\.yaml$
 
   # YAML formatting and validation
-  - repo: https://github.com/pre-commit/mirrors-yamllint
-    rev: v1.32.0
+  - repo: https://github.com/adrienverge/yamllint
+    rev: v1.35.1
     hooks:
       - id: yamllint
         args: ['-d', 'relaxed']

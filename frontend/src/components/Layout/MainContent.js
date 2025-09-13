@@ -10,10 +10,6 @@ const MainContentContainer = styled.main`
   }
 `;
 const MainContent = ({ children }) => {
-  return (
-    <MainContentContainer>
-      {children}
-    </MainContentContainer>
-  );
+  return <MainContentContainer>{children}</MainContentContainer>;
 };
-export default MainContent; 
+export default MainContent;

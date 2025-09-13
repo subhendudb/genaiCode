@@ -9,7 +9,7 @@ flask-cors
 flask-limiter
 bcrypt
 python-json-logger
-Werkzeug 
+Werkzeug
 pytest
-pytest-flask 
+pytest-flask
 pytest-xdist

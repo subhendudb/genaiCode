@@ -6,7 +6,8 @@ const Input = styled.input`
   border-radius: 6px;
   font-size: 16px;
   transition: all 0.3s;
-  background-color: ${({ theme }) => theme.inputBackground || theme.cardBackground};
+  background-color: ${({ theme }) =>
+    theme.inputBackground || theme.cardBackground};
   color: ${({ theme }) => theme.text};
   margin-bottom: 15px;
   &:focus {
@@ -18,11 +19,13 @@ const Input = styled.input`
     color: ${({ theme }) => theme.textSecondary || '#888'};
     opacity: 0.7;
   }
-  ${({ error }) => error && `
+  ${({ error }) =>
+    error &&
+    `
     border-color: #e74c3c;
     &:focus {
       box-shadow: 0 0 0 2px rgba(231, 76, 60, 0.2);
     }
   `}
 `;
-export default Input; 
+export default Input;

@@ -5,27 +5,27 @@ const { login, createAccount } = require('./utils/baseTest');
 test.describe('Reporting', () => {
   test.beforeEach(async ({ page }) => {
     await login(page);
-    
+
     // Setup test data
     const assetAccount = {
       name: 'Test Asset',
       type: 'ASSET',
-      opening_balance: '2000.00'
+      opening_balance: '2000.00',
     };
     const liabilityAccount = {
       name: 'Test Liability',
       type: 'LIABILITY',
-      opening_balance: '500.00'
+      opening_balance: '500.00',
     };
     const incomeAccount = {
       name: 'Test Income',
       type: 'INCOME',
-      opening_balance: '0.00'
+      opening_balance: '0.00',
     };
     const expenseAccount = {
       name: 'Test Expense',
       type: 'EXPENSE',
-      opening_balance: '0.00'
+      opening_balance: '0.00',
     };
     await createAccount(page, assetAccount);
     await createAccount(page, liabilityAccount);
@@ -35,15 +35,23 @@ test.describe('Reporting', () => {
     // Create some transactions
     await page.goto('http://localhost:8000/transactions');
     await page.click('button:has-text("Record New Transaction")');
-    await page.selectOption('select[name="account_id"]', { label: 'Test Income (INCOME)' });
-    await page.selectOption('select[name="contra_account_id"]', { label: 'Test Asset (ASSET)' });
+    await page.selectOption('select[name="account_id"]', {
+      label: 'Test Income (INCOME)',
+    });
+    await page.selectOption('select[name="contra_account_id"]', {
+      label: 'Test Asset (ASSET)',
+    });
     await page.fill('input[name="amount"]', '1000.00');
     await page.fill('input[name="description"]', 'Income transaction');
     await page.click('button:has-text("Record Transaction")');
 
     await page.click('button:has-text("Record New Transaction")');
-    await page.selectOption('select[name="account_id"]', { label: 'Test Asset (ASSET)' });
-    await page.selectOption('select[name="contra_account_id"]', { label: 'Test Expense (EXPENSE)' });
+    await page.selectOption('select[name="account_id"]', {
+      label: 'Test Asset (ASSET)',
+    });
+    await page.selectOption('select[name="contra_account_id"]', {
+      label: 'Test Expense (EXPENSE)',
+    });
     await page.fill('input[name="amount"]', '500.00');
     await page.fill('input[name="description"]', 'Expense transaction');
     await page.click('button:has-text("Record Transaction")');

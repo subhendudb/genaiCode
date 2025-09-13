@@ -30,4 +30,4 @@ const GlobalStyles = createGlobalStyle`
     margin-bottom: 1rem;
   }
 `;
-export { GlobalStyles }; 
+export { GlobalStyles };

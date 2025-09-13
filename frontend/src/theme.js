@@ -15,4 +15,4 @@ export const darkTheme = {
   text: '#f8f9fa',
   border: '#495057',
   shadow: '0 2px 4px rgba(0,0,0,0.3)',
-}; 
+};

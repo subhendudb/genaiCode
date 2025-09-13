@@ -29,7 +29,9 @@ function Layout({ theme, toggleTheme }) {
   return (
     <LayoutContainer>
       <Sidebar />
-      <MainContent><Outlet /></MainContent>
+      <MainContent>
+        <Outlet />
+      </MainContent>
       <RightPanel />
       <ThemeToggle onClick={toggleTheme}>
         {theme === 'light' ? '🌙' : '☀'}
@@ -37,4 +39,4 @@ function Layout({ theme, toggleTheme }) {
     </LayoutContainer>
   );
 }
-export default Layout; 
+export default Layout;

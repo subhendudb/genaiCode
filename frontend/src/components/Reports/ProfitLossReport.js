@@ -49,7 +49,7 @@ const SummaryLabel = styled.div`
 const SummaryValue = styled.div`
   font-size: 1.5rem;
   font-weight: bold;
-  color: ${({ positive, theme }) => positive ? theme.primary : '#e74c3c'};
+  color: ${({ positive, theme }) => (positive ? theme.primary : '#e74c3c')};
 `;
 
 const Section = styled.div`
@@ -92,7 +92,7 @@ const ProfitLossReport = () => {
         startDate.setDate(endDate.getDate() - 30);
         const response = await get('/api/reports/profit-loss', {
           start_date: format(startDate, 'yyyy-MM-dd'),
-          end_date: format(endDate, 'yyyy-MM-dd')
+          end_date: format(endDate, 'yyyy-MM-dd'),
         });
         setReportData(response.data);
       } catch (error) {
@@ -113,7 +113,8 @@ const ProfitLossReport = () => {
         <ReportHeader>
           <ReportTitle>Profit & Loss Statement</ReportTitle>
           <DateRange>
-            {format(new Date(reportData.start_date), 'MMM d, yyyy')} - {format(new Date(reportData.end_date), 'MMM d, yyyy')}
+            {format(new Date(reportData.start_date), 'MMM d, yyyy')} -{' '}
+            {format(new Date(reportData.end_date), 'MMM d, yyyy')}
           </DateRange>
         </ReportHeader>
         <SummaryCard>
@@ -143,9 +144,7 @@ const ProfitLossReport = () => {
           {/* In a real app, you would group income by category */}
           <ItemRow>
             <ItemName>Total Income</ItemName>
-            <ItemAmount>
-              ${reportData.total_income.toFixed(2)}
-            </ItemAmount>
+            <ItemAmount>${reportData.total_income.toFixed(2)}</ItemAmount>
           </ItemRow>
         </Section>
         <Section>
@@ -153,9 +152,7 @@ const ProfitLossReport = () => {
           {/* In a real app, you would list expense categories */}
           <ItemRow>
             <ItemName>Total Expenses</ItemName>
-            <ItemAmount>
-              (${reportData.total_expenses.toFixed(2)})
-            </ItemAmount>
+            <ItemAmount>(${reportData.total_expenses.toFixed(2)})</ItemAmount>
           </ItemRow>
         </Section>
         <Section>
@@ -173,4 +170,4 @@ const ProfitLossReport = () => {
     </ReportContainer>
   );
 };
-export default ProfitLossReport; 
+export default ProfitLossReport;

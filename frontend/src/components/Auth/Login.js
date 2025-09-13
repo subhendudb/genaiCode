@@ -16,16 +16,16 @@ const LoginContainer = styled.div`
 const Login = () => {
   const [credentials, setCredentials] = useState({
     username: '',
-    password: ''
+    password: '',
   });
   const [error, setError] = useState(null); // <-- Add error state
   const { login } = useAuth();
   const { post } = useApi();
-  const handleChange = (e) => {
+  const handleChange = e => {
     const { name, value } = e.target;
     setCredentials(prev => ({ ...prev, [name]: value }));
   };
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     try {
       const response = await post('/api/login', credentials);
@@ -39,14 +39,17 @@ const Login = () => {
     <LoginContainer>
       <h2>Enter Credentials</h2>
       {error && (
-        <div style={{
-          background: '#ffe0e0',
-          color: '#b00020',
-          padding: '10px',
-          borderRadius: '6px',
-          marginBottom: '16px',
-          position: 'relative'
-        }} data-testid="login-error">
+        <div
+          style={{
+            background: '#ffe0e0',
+            color: '#b00020',
+            padding: '10px',
+            borderRadius: '6px',
+            marginBottom: '16px',
+            position: 'relative',
+          }}
+          data-testid='login-error'
+        >
           {error}
           <button
             onClick={() => setError(null)}
@@ -59,9 +62,9 @@ const Login = () => {
               fontWeight: 'bold',
               fontSize: '16px',
               cursor: 'pointer',
-              color: '#b00020'
+              color: '#b00020',
             }}
-            aria-label="Close"
+            aria-label='Close'
           >
             ×
           </button>
@@ -69,23 +72,25 @@ const Login = () => {
       )}
       <form onSubmit={handleSubmit}>
         <Input
-          name="username"
+          name='username'
           value={credentials.username}
           onChange={handleChange}
-          placeholder="Username"
+          placeholder='Username'
           required
         />
         <Input
-          type="password"
-          name="password"
+          type='password'
+          name='password'
           value={credentials.password}
           onChange={handleChange}
-          placeholder="Password"
+          placeholder='Password'
           required
         />
-        <Button data-testid="login-submit" type="submit">Login</Button>
+        <Button data-testid='login-submit' type='submit'>
+          Login
+        </Button>
       </form>
     </LoginContainer>
   );
 };
-export default Login; 
+export default Login;

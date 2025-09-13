@@ -24,30 +24,26 @@ const ToggleSlider = styled.span`
   right: 0;
   bottom: 0;
   background-color: ${({ theme }) => theme.textSecondary};
-  transition: .4s;
+  transition: 0.4s;
   border-radius: 24px;
   &:before {
     position: absolute;
-    content: "";
+    content: '';
     height: 16px;
     width: 16px;
     left: 4px;
     bottom: 4px;
     background-color: white;
-    transition: .4s;
+    transition: 0.4s;
     border-radius: 50%;
   }
 `;
 const Toggle = ({ checked, onChange }) => {
   return (
     <ToggleContainer>
-      <ToggleInput
-        type="checkbox"
-        checked={checked}
-        onChange={onChange}
-      />
+      <ToggleInput type='checkbox' checked={checked} onChange={onChange} />
       <ToggleSlider />
     </ToggleContainer>
   );
 };
-export default Toggle; 
+export default Toggle;

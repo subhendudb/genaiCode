@@ -21,7 +21,7 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   }, [token]);
 
-  const login = async (credentials) => {
+  const login = async credentials => {
     // Try to convert credentials to an object if it's a string
     let safeCredentials = credentials;
     if (typeof credentials === 'string') {
@@ -80,4 +80,4 @@ export const useAuth = () => {
     throw new Error('useAuth must be used within an AuthProvider');
   }
   return context;
-}; 
+};

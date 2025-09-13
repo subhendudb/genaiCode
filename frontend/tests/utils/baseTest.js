@@ -18,7 +18,6 @@ async function createAccount(page, accountData) {
   await page.goto('/accounts');
   //await page.click('button:has-text("Create New Account")');
 
-  
   await page.fill('input[name="name"]', accountData.name);
   await page.selectOption('select[name="type"]', accountData.type);
   if (accountData.description) {

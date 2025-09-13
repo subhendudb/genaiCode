@@ -1,9 +1,11 @@
 export const filterTransactions = (transactions, filters) => {
   return transactions.filter(transaction => {
     // Filter by account
-    if (filters.account &&
+    if (
+      filters.account &&
       transaction.account_id !== filters.account &&
-      transaction.contra_account_id !== filters.account) {
+      transaction.contra_account_id !== filters.account
+    ) {
       return false;
     }
     // Filter by type (you would need to determine type based on account types)
@@ -29,7 +31,11 @@ export const filterTransactions = (transactions, filters) => {
   });
 };
 
-export const sortTransactions = (transactions, sortBy = 'date', ascending = false) => {
+export const sortTransactions = (
+  transactions,
+  sortBy = 'date',
+  ascending = false
+) => {
   return [...transactions].sort((a, b) => {
     const dateA = new Date(a.transaction_date);
     const dateB = new Date(b.transaction_date);
@@ -41,4 +47,4 @@ export const sortTransactions = (transactions, sortBy = 'date', ascending = fals
     }
     return 0;
   });
-}; 
+};

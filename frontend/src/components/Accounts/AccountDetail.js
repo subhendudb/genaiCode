@@ -22,7 +22,10 @@ const AccountDetail = () => {
         const res = await get(`/api/accounts/${id}`);
         // Axios response: data is in res.data
         setAccount(res.data);
-        setForm({ name: res.data.name, description: res.data.description || '' });
+        setForm({
+          name: res.data.name,
+          description: res.data.description || '',
+        });
       } catch (err) {
         setError(err.response?.data?.error || err.message);
       }
@@ -58,15 +61,15 @@ const AccountDetail = () => {
       <h2>Account Details</h2>
       <form onSubmit={handleUpdate}>
         <Input
-          label="Name"
-          name="name"
+          label='Name'
+          name='name'
           value={form.name}
           onChange={handleChange}
           required
         />
         <Input
-          label="Description"
-          name="description"
+          label='Description'
+          name='description'
           value={form.description}
           onChange={handleChange}
         />
@@ -85,8 +88,12 @@ const AccountDetail = () => {
         <div>
           <strong>Current Balance:</strong> {account.current_balance}
         </div>
-        <Button type="submit">Update</Button>
-        <Button type="button" onClick={() => navigate(-1)} style={{ marginLeft: 8 }}>
+        <Button type='submit'>Update</Button>
+        <Button
+          type='button'
+          onClick={() => navigate(-1)}
+          style={{ marginLeft: 8 }}
+        >
           Back
         </Button>
       </form>
@@ -94,4 +101,4 @@ const AccountDetail = () => {
   );
 };
 
-export default AccountDetail; 
+export default AccountDetail;

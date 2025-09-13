@@ -7,9 +7,9 @@ import { format } from 'date-fns';
 const TransactionCardContainer = styled(Card)`
   padding: 15px;
   margin-bottom: 15px;
-  border-left: 4px solid ${({ theme, isVoid }) =>
-    isVoid ? theme.textSecondary : theme.primary};
-  opacity: ${({ isVoid }) => isVoid ? 0.7 : 1};
+  border-left: 4px solid
+    ${({ theme, isVoid }) => (isVoid ? theme.textSecondary : theme.primary)};
+  opacity: ${({ isVoid }) => (isVoid ? 0.7 : 1)};
   transition: all 0.2s;
   cursor: pointer;
   &:hover {
@@ -27,8 +27,7 @@ const TransactionHeader = styled.div`
 const TransactionAmount = styled.div`
   font-size: 1.2rem;
   font-weight: bold;
-  color: ${({ theme, isNegative }) =>
-    isNegative ? '#e74c3c' : theme.primary};
+  color: ${({ theme, isNegative }) => (isNegative ? '#e74c3c' : theme.primary)};
 `;
 
 const TransactionDate = styled.span`
@@ -77,7 +76,10 @@ const TransactionCard = ({ transaction }) => {
     navigate(`/transactions/${transaction.id}`);
   };
   const isNegative = parseFloat(transaction.amount) < 0;
-  const formattedDate = format(new Date(transaction.transaction_date), 'MMM dd, yyyy');
+  const formattedDate = format(
+    new Date(transaction.transaction_date),
+    'MMM dd, yyyy'
+  );
   const formattedAmount = Math.abs(parseFloat(transaction.amount)).toFixed(2);
   return (
     <TransactionCardContainer
@@ -114,4 +116,4 @@ const TransactionCard = ({ transaction }) => {
     </TransactionCardContainer>
   );
 };
-export default TransactionCard; 
+export default TransactionCard;

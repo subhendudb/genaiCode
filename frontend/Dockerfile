@@ -18,4 +18,4 @@ EXPOSE 8080
 # No CMD needed, as this image is just for building
 
 # Optionally, you can set the default command to list the build directory
-CMD ["npm", "start"] 
+CMD ["npm", "start"]

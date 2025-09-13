@@ -39,11 +39,11 @@ const TransactionList = ({ transactions, accounts }) => {
   const [filters, setFilters] = useState({
     account: '',
     type: '',
-    dateRange: '30days'
+    dateRange: '30days',
   });
 
   // Helper to get date threshold
-  const getDateThreshold = (range) => {
+  const getDateThreshold = range => {
     const now = new Date();
     switch (range) {
       case '7days':
@@ -59,7 +59,11 @@ const TransactionList = ({ transactions, accounts }) => {
 
   const filteredTransactions = transactions.filter(transaction => {
     // Account filter
-    if (filters.account && String(transaction.accountId) !== String(filters.account)) return false;
+    if (
+      filters.account &&
+      String(transaction.accountId) !== String(filters.account)
+    )
+      return false;
     // Type filter
     if (filters.type && transaction.type !== filters.type) return false;
     // Date range filter
@@ -77,38 +81,41 @@ const TransactionList = ({ transactions, accounts }) => {
           <FilterLabel>Account</FilterLabel>
           <FilterSelect
             value={filters.account}
-            onChange={(e) => setFilters({...filters, account: e.target.value})}
+            onChange={e => setFilters({ ...filters, account: e.target.value })}
           >
-            <option value="">All Accounts</option>
-            {accounts && accounts.map(account => (
-              <option key={account.id} value={account.id}>
-                {account.name}
-              </option>
-            ))}
+            <option value=''>All Accounts</option>
+            {accounts &&
+              accounts.map(account => (
+                <option key={account.id} value={account.id}>
+                  {account.name}
+                </option>
+              ))}
           </FilterSelect>
         </FilterGroup>
         <FilterGroup>
           <FilterLabel>Transaction Type</FilterLabel>
           <FilterSelect
             value={filters.type}
-            onChange={(e) => setFilters({...filters, type: e.target.value})}
+            onChange={e => setFilters({ ...filters, type: e.target.value })}
           >
-            <option value="">All Types</option>
-            <option value="income">Income</option>
-            <option value="expense">Expense</option>
-            <option value="transfer">Transfer</option>
+            <option value=''>All Types</option>
+            <option value='income'>Income</option>
+            <option value='expense'>Expense</option>
+            <option value='transfer'>Transfer</option>
           </FilterSelect>
         </FilterGroup>
         <FilterGroup>
           <FilterLabel>Date Range</FilterLabel>
           <FilterSelect
             value={filters.dateRange}
-            onChange={(e) => setFilters({...filters, dateRange: e.target.value})}
+            onChange={e =>
+              setFilters({ ...filters, dateRange: e.target.value })
+            }
           >
-            <option value="7days">Last 7 Days</option>
-            <option value="30days">Last 30 Days</option>
-            <option value="90days">Last 90 Days</option>
-            <option value="all">All Time</option>
+            <option value='7days'>Last 7 Days</option>
+            <option value='30days'>Last 30 Days</option>
+            <option value='90days'>Last 90 Days</option>
+            <option value='all'>All Time</option>
           </FilterSelect>
         </FilterGroup>
       </FiltersContainer>
@@ -124,4 +131,4 @@ const TransactionList = ({ transactions, accounts }) => {
     </ListContainer>
   );
 };
-export default TransactionList; 
+export default TransactionList;
