@@ -176,7 +176,7 @@ docker pull docker/docker-bench-security || echo "⚠️  Failed to pull Docker 
 
 # OWASP ZAP Docker image
 echo "📦 Pulling OWASP ZAP Docker image..."
-docker pull owasp/zap2docker-stable || echo "⚠️  Failed to pull OWASP ZAP Docker image"
+docker pull ghcr.io/zaproxy/zaproxy:stable || echo "⚠️  Failed to pull OWASP ZAP Docker image"
 
 echo ""
 

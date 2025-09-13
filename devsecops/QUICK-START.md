@@ -92,7 +92,7 @@ checkov -f docker-compose.yml --framework docker_compose --output json
 docker-compose up -d
 
 # OWASP ZAP scan
-docker run -t owasp/zap2docker-stable zap-baseline.py -t http://localhost:8000
+docker run -t ghcr.io/zaproxy/zaproxy:stable zap-baseline.py -t http://localhost:8000
 
 # Stop application
 docker-compose down

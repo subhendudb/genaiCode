@@ -36,7 +36,7 @@ This document outlines the recommended security tools for implementing a "Shift-
 | **Container Scanning** | trivy | Open Source | Container scanner | Mandatory | `brew install trivy` | Multi-purpose scanner |
 | **Container Scanning** | docker-bench-security | Open Source | CIS benchmark | High | `docker run --rm -v /var/run/docker.sock:/var/run/docker.sock docker/docker-bench-security` | Docker security |
 | **Container Scanning** | Snyk Container | Commercial | Container scanner | High | `npm install -g snyk` | Commercial container scanning |
-| **DAST** | OWASP ZAP | Open Source | Web app scanner | Mandatory | `docker run -t owasp/zap2docker-stable` | Automated security testing |
+| **DAST** | OWASP ZAP | Open Source | Web app scanner | Mandatory | `docker run -t ghcr.io/zaproxy/zaproxy:stable` | Automated security testing |
 | **DAST** | Burp Suite | Commercial | Web app scanner | High | Commercial license | Professional DAST |
 | **DAST** | Nikto | Open Source | Web scanner | Medium | `brew install nikto` | Web server scanner |
 
