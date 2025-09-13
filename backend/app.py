@@ -1,21 +1,20 @@
+"""Flask application for accounting system API."""
 import logging
 import os
 from datetime import date, datetime, timedelta
 from decimal import Decimal
-from enum import Enum
 from functools import wraps
 from logging.config import dictConfig
-from typing import Dict, List, Optional
+from typing import Any, Dict, List, Optional
 
-import bcrypt
 import jwt
 from dotenv import load_dotenv
-from flask import Flask, Response, jsonify, request
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 from jwt.exceptions import InvalidTokenError
 from pydantic import BaseModel, Field, ValidationError, validator
-from sqlalchemy import and_, func, or_, select, update
+from sqlalchemy import and_, func, or_, select
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from sqlalchemy.orm import joinedload
 from werkzeug.security import check_password_hash, generate_password_hash
@@ -31,7 +30,8 @@ app.config["JWT_ALGORITHM"] = os.environ.get("JWT_ALGORITHM", "HS256")
 app.config["TOKEN_EXPIRES_SECONDS"] = int(os.environ.get("TOKEN_EXPIRES_SECONDS", 3600))
 
 # CORS setup (restrict origins as needed)
-# CORS(app, resources={r"/api/*": {"origins": os.environ.get('CORS_ORIGINS', '*')}},supports_credentials=True)
+# CORS(app, resources={r"/api/*": {"origins": os.environ.get('CORS_ORIGINS', '*')}},
+#      supports_credentials=True)
 CORS(app, origins="*", supports_credentials=True)
 
 # Database setup
@@ -62,7 +62,7 @@ logger = logging.getLogger(__name__)
 
 
 # Database Models
-class Account(db.Model):
+class Account(db.Model):  # type: ignore
     """
     Represents an account in the accounting system.
     """
@@ -103,7 +103,7 @@ class Account(db.Model):
         }
 
 
-class Transaction(db.Model):
+class Transaction(db.Model):  # type: ignore
     """
     Represents a financial transaction between two accounts.
     """
@@ -158,7 +158,7 @@ class Transaction(db.Model):
         }
 
 
-class BalanceHistory(db.Model):
+class BalanceHistory(db.Model):  # type: ignore
     """
     Stores historical balance snapshots for accounts.
     """
@@ -193,7 +193,7 @@ class BalanceHistory(db.Model):
         }
 
 
-class User(db.Model):
+class User(db.Model):  # type: ignore
     """
     User model for authentication.
     """
@@ -413,7 +413,7 @@ class AccountService:
             db.session.commit()
             logger.info(f"Created account: {account.id}")
             return account
-        except IntegrityError as e:
+        except IntegrityError:
             db.session.rollback()
             raise RequestValidationError(
                 "Account creation failed due to database constraints"
@@ -466,7 +466,7 @@ class AccountService:
 
     @staticmethod
     def list_accounts(
-        filters: dict = None, page: int = 1, per_page: int = 20
+        filters: Optional[Dict[str, Any]] = None, page: int = 1, per_page: int = 20
     ) -> List[Account]:
         """
         List accounts, optionally filtered by type or name, with pagination.
@@ -639,10 +639,11 @@ class TransactionService:
 
     @staticmethod
     def list_transactions(
-        filters: dict = None, page: int = 1, per_page: int = 20
+        filters: Optional[Dict[str, Any]] = None, page: int = 1, per_page: int = 20
     ) -> List[Transaction]:
         """
-        List transactions, optionally filtered by account, date, or void status, with pagination.
+        List transactions, optionally filtered by account, date, or void status,
+        with pagination.
         """
         try:
             query = (
@@ -679,7 +680,7 @@ class TransactionService:
                 if conditions:
                     query = query.where(and_(*conditions))
 
-            if "limit" in filters:
+            if filters and "limit" in filters:
                 query = query.limit(filters["limit"])
 
             transactions = db.session.execute(query).scalars().unique().all()
@@ -698,7 +699,7 @@ class ReportService:
     """
 
     @staticmethod
-    def generate_balance_report(report_date: date = None) -> dict:
+    def generate_balance_report(report_date: Optional[date] = None) -> Dict[str, Any]:
         """
         Generate a balance report for all accounts as of a given date.
         """
@@ -750,7 +751,7 @@ class ReportService:
                 .where(
                     Account.type == "INCOME",
                     Transaction.transaction_date.between(start_date, end_date),
-                    Transaction.is_void == False,
+                    Transaction.is_void.is_(False),
                 )
             ).scalar_one()
             income = income_result if income_result is not None else Decimal("0.00")
@@ -761,7 +762,7 @@ class ReportService:
                 .where(
                     Account.type == "EXPENSE",
                     Transaction.transaction_date.between(start_date, end_date),
-                    Transaction.is_void == False,
+                    Transaction.is_void.is_(False),
                 )
             ).scalar_one()
 
@@ -1010,7 +1011,7 @@ def login():
     """
     Login endpoint with password hashing and user table.
     """
-    print(f"login started..")
+    print("login started..")
     try:
         data = LoginRequest(**request.get_json()).dict()
         user = db.session.execute(
@@ -1031,7 +1032,7 @@ def login():
         return jsonify(
             {"token": token, "expires_in": app.config["TOKEN_EXPIRES_SECONDS"]}
         )
-    except ValidationError as e:
+    except ValidationError:
         raise RequestValidationError("Invalid request format")
     except Exception as e:
         logger.error(f"Login error: {str(e)}")
@@ -1066,7 +1067,7 @@ def register():
         db.session.add(user)
         db.session.commit()
         return jsonify({"message": "User registered successfully"}), 201
-    except ValidationError as e:
+    except ValidationError:
         raise RequestValidationError("Invalid request format")
     except Exception as e:
         logger.error(f"Registration error: {str(e)}")
@@ -1095,4 +1096,7 @@ if __name__ == "__main__":
     # Only for development! Use Alembic for migrations in production.
     if os.environ.get("FLASK_ENV") == "development":
         init_db()
-    app.run(host="0.0.0.0", port=5000)
+    # Use environment variable for host, default to localhost for security
+    host = os.environ.get("FLASK_HOST", "127.0.0.1")
+    port = int(os.environ.get("FLASK_PORT", "5000"))
+    app.run(host=host, port=port)

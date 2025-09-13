@@ -35,7 +35,7 @@ const AccountForm = ({ onAccountCreated }) => {
         opening_balance: '0.00',
       });
     } catch (error) {
-      console.error('Error creating account:', error);
+      // console.error('Error creating account:', error);
     }
   };
   return (

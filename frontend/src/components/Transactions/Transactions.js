@@ -21,7 +21,7 @@ const Transactions = () => {
         setTransactions(transactionsRes.data);
         //console.log(transactionsRes.data)
       } catch (error) {
-        console.error('Error fetching transactions or accounts:', error);
+        // console.error('Error fetching transactions or accounts:', error);
       } finally {
         setLoading(false);
       }

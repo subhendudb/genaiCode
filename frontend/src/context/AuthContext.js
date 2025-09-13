@@ -19,7 +19,7 @@ export const AuthProvider = ({ children }) => {
       navigate('/login'); // Redirect to login if no token
     }
     setLoading(false);
-  }, [token]);
+  }, [token, navigate]);
 
   const login = async credentials => {
     // Try to convert credentials to an object if it's a string
@@ -47,16 +47,12 @@ export const AuthProvider = ({ children }) => {
       );
     }
 
-    try {
-      const { data } = await api.post('/api/login', safeCredentials);
-      localStorage.setItem('token', data.token);
-      setToken(data.token);
-      setUser(true); // No user info, just mark as logged in
-      navigate('/');
-      return data;
-    } catch (error) {
-      throw error;
-    }
+    const { data } = await api.post('/api/login', safeCredentials);
+    localStorage.setItem('token', data.token);
+    setToken(data.token);
+    setUser(true); // No user info, just mark as logged in
+    navigate('/');
+    return data;
   };
 
   const logout = () => {

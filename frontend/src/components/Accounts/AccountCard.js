@@ -9,7 +9,7 @@ const AccountCardContainer = styled(Card)`
   transition: transform 0.2s;
   cursor: pointer;
   border-left: 4px solid
-    ${({ theme, accountType }) =>
+    ${({ accountType }) =>
       accountType === 'ASSET'
         ? '#2ecc71'
         : accountType === 'LIABILITY'

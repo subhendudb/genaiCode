@@ -54,7 +54,7 @@ const TransactionForm = ({ accounts, onTransactionCreated }) => {
         reference_number: '',
       }));
     } catch (error) {
-      console.error('Error creating transaction:', error);
+      // console.error('Error creating transaction:', error);
     }
   };
 

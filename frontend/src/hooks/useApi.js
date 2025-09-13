@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
 
@@ -14,36 +14,24 @@ const useApi = () => {
 
   const get = useCallback(
     async (url, params) => {
-      try {
-        const response = await axios.get(url, { ...config, params });
-        return response;
-      } catch (error) {
-        throw error;
-      }
+      const response = await axios.get(url, { ...config, params });
+      return response;
     },
     [config]
   );
 
   const post = useCallback(
     async (url, data) => {
-      try {
-        const response = await axios.post(url, data, config);
-        return response;
-      } catch (error) {
-        throw error;
-      }
+      const response = await axios.post(url, data, config);
+      return response;
     },
     [config]
   );
 
   const put = useCallback(
     async (url, data) => {
-      try {
-        const response = await axios.put(url, data, config);
-        return response;
-      } catch (error) {
-        throw error;
-      }
+      const response = await axios.put(url, data, config);
+      return response;
     },
     [config]
   );

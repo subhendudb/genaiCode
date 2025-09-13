@@ -44,7 +44,6 @@ const TransactionList = ({ transactions, accounts }) => {
 
   // Helper to get date threshold
   const getDateThreshold = range => {
-    const now = new Date();
     switch (range) {
       case '7days':
         return new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);

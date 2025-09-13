@@ -76,7 +76,7 @@ const BalanceReport = () => {
         const response = await get('/api/reports/balance');
         setReportData(response.data);
       } catch (error) {
-        console.error('Error fetching balance report:', error);
+        // console.error('Error fetching balance report:', error);
       } finally {
         setLoading(false);
       }
@@ -117,7 +117,12 @@ const BalanceReport = () => {
               ))}
             <TotalRow>
               <span>Total {type.charAt(0) + type.slice(1).toLowerCase()}</span>
-              <AccountBalance bold positive={reportData.totals[type] >= 0}>
+              <AccountBalance
+                bold
+                // eslint-disable-next-line security/detect-object-injection
+                positive={(reportData.totals[type] || 0) >= 0}
+              >
+                {/* eslint-disable-next-line security/detect-object-injection */}
                 ${Math.abs(reportData.totals[type] || 0).toFixed(2)}
               </AccountBalance>
             </TotalRow>

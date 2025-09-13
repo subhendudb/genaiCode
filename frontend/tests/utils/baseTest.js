@@ -1,5 +1,5 @@
 // tests/utils/baseTest.js
-const { test, expect } = require('@playwright/test');
+const { expect } = require('@playwright/test');
 
 // Helper function to login
 async function login(page, username = 'testuser', password = 'testpassword') {

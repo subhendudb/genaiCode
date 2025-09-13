@@ -96,7 +96,7 @@ const ProfitLossReport = () => {
         });
         setReportData(response.data);
       } catch (error) {
-        console.error('Error fetching profit/loss report:', error);
+        // console.error('Error fetching profit/loss report:', error);
       } finally {
         setLoading(false);
       }

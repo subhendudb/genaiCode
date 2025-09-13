@@ -28,7 +28,7 @@ const Login = () => {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      const response = await post('/api/login', credentials);
+      await post('/api/login', credentials);
       setError(null); // Clear error on success
       login(credentials);
     } catch (error) {
